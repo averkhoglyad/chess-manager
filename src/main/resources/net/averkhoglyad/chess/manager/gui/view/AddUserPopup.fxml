@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.control.ListView?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8.0.45" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="net.averkhoglyad.chess.manager.gui.controller.AddUserPopupController"
+            fx:id="pane">
+    <top>
+        <Label text="Lichess profile" alignment="BASELINE_LEFT" textAlignment="LEFT"/>
+    </top>
+    <center>
+        <HBox alignment="BASELINE_CENTER">
+            <children>
+                <TextField fx:id="profileTextField"/>
+                <Pane prefWidth="10"/>
+                <Button text="Add" onAction="#addLichessUser"/>
+            </children>
+        </HBox>
+    </center>
+    <bottom>
+        <ListView fx:id="usersListView" prefWidth="125">
+            <placeholder>
+                <Label text="No profiles" textAlignment="LEFT"/>
+            </placeholder>
+        </ListView>
+    </bottom>
+</BorderPane>

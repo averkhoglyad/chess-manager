@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.input.KeyCombination?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import org.controlsfx.glyphfont.Glyph?>
+<VBox xmlns="http://javafx.com/javafx/8.0.45" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="net.averkhoglyad.chess.manager.gui.controller.MenuController">
+    <children>
+        <MenuBar>
+            <menus>
+                <Menu text="_Help">
+                    <items>
+                        <MenuItem text="_Resources" onAction="#showResourcesPopup" />
+                        <MenuItem text="_About" onAction="#showAboutPopup" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <ToolBar fx:id="toolbar">
+            <items>
+                <SplitMenuButton fx:id="usersMenuButton" onAction="#showAddUserPopup" alignment="CENTER">
+                    <graphic>
+                        <Glyph alignment="CENTER" fontFamily="FontAwesome" icon="USERS"/>
+                    </graphic>
+                    <tooltip>
+                        <Tooltip text="Lichess users"/>
+                    </tooltip>
+                    <items>
+                        <MenuItem fx:id="noUsersMenuItem" text="No user added" disable="true"/>
+                    </items>
+                </SplitMenuButton>
+                <SplitMenuButton fx:id="pgnDownloadButton" onAction="#importPgn" disable="true">
+                    <graphic>
+                        <Glyph fontFamily="FontAwesome" icon="DOWNLOAD"/>
+                    </graphic>
+                    <tooltip>
+                        <Tooltip text="Download selected games as PGN"/>
+                    </tooltip>
+                    <items>
+                        <MenuItem text="Import" onAction="#importPgn"/>
+                        <MenuItem text="Clear"  onAction="#clearSelectedGames"/>
+                    </items>
+                </SplitMenuButton>
+                <Pane prefWidth="10" HBox.hgrow="SOMETIMES"/>
+                <Button fx:id="prevButton" alignment="CENTER" prefWidth="25" onAction="#prevPage">
+                    <graphic>
+                        <Glyph alignment="TOP_CENTER" fontFamily="FontAwesome" fontSize="10" icon="LONG_ARROW_LEFT"/>
+                    </graphic>
+                </Button>
+                <Label fx:id="pagingLabel"/>
+                <Button fx:id="nextButton" alignment="CENTER" prefWidth="25" onAction="#nextPage">
+                    <graphic>
+                        <Glyph alignment="TOP_CENTER" fontFamily="FontAwesome" fontSize="10" icon="LONG_ARROW_RIGHT"/>
+                    </graphic>
+                </Button>
+            </items>
+        </ToolBar>
+    </children>
+</VBox>

@@ -3,3 +3,4 @@ etc/
 build/
 .gradle/
 out/
+/src/test/java/TestTest.java
