@@ -34,7 +34,7 @@ public class AddUserPopupController {
     public void initialize() {
         BorderPane.setMargin(pane.getTop(), new Insets(5));
         ApplicationEventDispatcher.getInstance()
-            .on(ViewEvent.SHOW_ADD_USER_POPUP, () -> profileTextField.setText(""));
+            .on(ViewEvent.SHOW_MANAGE_USERS_POPUP, () -> profileTextField.setText(""));
         usersListView.setItems(ApplicationModel.getInstance().getUsers());
         usersListView.setCellFactory((ListView<User> view) -> {
             return new ListCell<User>() {

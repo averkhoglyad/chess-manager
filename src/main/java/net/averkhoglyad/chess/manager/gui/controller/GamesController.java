@@ -164,6 +164,7 @@ public class GamesController {
 
         // Bind
         eventDispatcher.on(ViewEvent.SELECT_USER, o -> {
+            applicationModel.getSelectedGames().clear();
             currentUser = o.toString();
             applicationModel.setCurrentPage(1);
         });

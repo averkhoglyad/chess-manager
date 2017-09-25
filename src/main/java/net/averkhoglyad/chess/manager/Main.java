@@ -97,7 +97,7 @@ public class Main extends Application {
 
     private void bindViewEvents() {
         ApplicationEventDispatcher.getInstance().on(ViewEvent.SHOW_IMPORT_FILE_POPUP, this::showPgnImportPopup);
-        ApplicationEventDispatcher.getInstance().on(ViewEvent.SHOW_ADD_USER_POPUP, () -> addUserStage.show());
+        ApplicationEventDispatcher.getInstance().on(ViewEvent.SHOW_MANAGE_USERS_POPUP, () -> addUserStage.show());
         ApplicationEventDispatcher.getInstance().on(ViewEvent.CLOSE_ADD_USER_POPUP, () -> addUserStage.close());
     }
 

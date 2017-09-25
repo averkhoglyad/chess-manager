@@ -3,10 +3,18 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane xmlns="http://javafx.com/javafx/8.0.45" xmlns:fx="http://javafx.com/fxml/1"
+<?import net.averkhoglyad.chess.manager.gui.component.TopMenu?>
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="net.averkhoglyad.chess.manager.gui.controller.RootController"
             prefHeight="480" prefWidth="640">
     <top>
-        <fx:include source="TopMenu.fxml"/>
+        <TopMenu fx:id="topMenu"
+                 onChangePage="#changePage"
+                 onSelectUser="#selectUser"
+                 onImportPgn="#importPgn"
+                 onClearSelectedGames="#clearSelectedGames"
+                 onManageUsersClick="#manageUsers">
+        </TopMenu>
     </top>
     <center>
         <fx:include source="Games.fxml"/>

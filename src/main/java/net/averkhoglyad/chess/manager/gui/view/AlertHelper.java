@@ -22,6 +22,7 @@ public abstract class AlertHelper {
         return error(e.getMessage(), null, e);
     }
 
+    // Error
     public static Alert error(String title, Throwable e) {
         return error(title, e.getMessage(), e);
     }
@@ -74,6 +75,7 @@ public abstract class AlertHelper {
         return alert(ERROR, title, header, message);
     }
 
+    // Warning
     public static Alert warning(String title) {
         return alert(WARNING, title, null, title);
     }
@@ -86,6 +88,7 @@ public abstract class AlertHelper {
         return alert(WARNING, title, header, message);
     }
 
+    // Info
     public static Alert info(String title) {
         return alert(INFORMATION, title, null, null);
     }
@@ -98,6 +101,7 @@ public abstract class AlertHelper {
         return alert(INFORMATION, title, header, message);
     }
 
+    // Impl
     private static Alert alert(AlertType type, String title, String header, String message) {
         Alert alert = new Alert(type);
         alert.setTitle(title);

@@ -29,8 +29,9 @@ import static net.averkhoglyad.chess.manager.core.helper.MapBuilder.of;
 
 public class ChessDiagram extends Region {
 
-    private static final String EMPTY_BOARD = "8/8/8/8/8/8/8/8 w KQkq - 0 1";
-    private static final String START_BOARD = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+    public static final String EMPTY_BOARD = "8/8/8/8/8/8/8/8 w KQkq - 0 1";
+    public static final String START_BOARD = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+
     private static final int CELL_SIZE = 25;
 
     private StringProperty fen = new SimpleStringProperty(EMPTY_BOARD);
