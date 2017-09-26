@@ -5,17 +5,16 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.util.Pair;
 import net.averkhoglyad.chess.manager.core.helper.StringHelper;
-import net.averkhoglyad.chess.manager.gui.view.ViewHelper;
 import net.averkhoglyad.chess.manager.core.util.Pool;
 import net.averkhoglyad.chess.manager.core.util.SimplePoolImpl;
 
@@ -27,24 +26,14 @@ import java.util.Map;
 import static net.averkhoglyad.chess.manager.core.helper.MapBuilder.map;
 import static net.averkhoglyad.chess.manager.core.helper.MapBuilder.of;
 
-public class ChessDiagram extends Region {
+public class ChessDiagram extends BaseComponent {
 
-    public static final String EMPTY_BOARD = "8/8/8/8/8/8/8/8 w KQkq - 0 1";
+    public static final String EMPTY_BOARD = "8/8/8/8/8/8/8/8";
     public static final String START_BOARD = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 
     private static final int CELL_SIZE = 25;
 
-    private StringProperty fen = new SimpleStringProperty(EMPTY_BOARD);
-    private StringProperty title = new SimpleStringProperty("");
-
-    private Pool<Label> labelsPool = new SimplePoolImpl<>(Label::new, 16);
-    private List<Label> usedLabels = new ArrayList<>(16);
-
-    private final Label titleLabel;
-    private final GridPane board;
-    private final StackPane diagram;
-
-    private final Map<String, String> piecesMap = Collections.unmodifiableMap(map(
+    private static final Map<String, String> PIECES_MAP = Collections.unmodifiableMap(map(
         of("B", "\u2657"),
         of("K", "\u2654"),
         of("N", "\u2658"),
@@ -59,20 +48,33 @@ public class ChessDiagram extends Region {
         of("r", "\u265C")
     ));
 
+    // Properties
+    private StringProperty fen = new SimpleStringProperty(EMPTY_BOARD);
+    private StringProperty title = new SimpleStringProperty("");
+    private BooleanProperty flipped = new SimpleBooleanProperty(false);
+
+    // Private
+    private final Pool<Label> labelsPool = new SimplePoolImpl<>(Label::new, 32);
+    private final List<Label> usedLabels = new ArrayList<>(32);
+
+    // Nodes
+    @FXML
+    private GridPane board;
+    @FXML
+    private StackPane diagram;
+
     private final Font font =
         Font.loadFont(getClass().getClassLoader().getResourceAsStream("fonts/arial-unicode-ms.ttf"), CELL_SIZE * 0.8);
 
-    private BooleanProperty flipped = new SimpleBooleanProperty(false);
-
     public ChessDiagram() {
-        this.getChildren().add(ViewHelper.loadFxmlView("net/averkhoglyad/chess/manager/gui/component/ChessDiagram.fxml"));
-        titleLabel = Label.class.cast(lookup("#title"));
-        titleLabel.textProperty().bind(title);
-        diagram = StackPane.class.cast(lookup("#diagram"));
-        board = GridPane.class.cast(diagram.lookup("#board"));
+        super("net/averkhoglyad/chess/manager/gui/component/ChessDiagram.fxml");
+    }
+
+    public void initialize() {
         buildBoardCells(board);
         fen.addListener((observable, oldValue, newValue) -> renderPieces(parseFen(newValue)));
         flipped.addListener((observable, oldValue, newValue) -> renderPieces(parseFen(fen.get())));
+        fitToParentSize();
     }
 
     private void buildBoardCells(GridPane board) {
@@ -89,6 +91,7 @@ public class ChessDiagram extends Region {
     }
 
     private List<Pair<String, Integer>> parseFen(String fen) {
+        fen = fen.trim();
         int i = fen.indexOf(' ');
         if (i > 0) {
             fen = fen.substring(0, i);
@@ -118,7 +121,7 @@ public class ChessDiagram extends Region {
     private void parsePiece(String figure, int index) {
         Label piece = labelsPool.provide();
         piece.setFont(font);
-        piece.setText(piecesMap.get(figure));
+        piece.setText(PIECES_MAP.get(figure));
         int effectedIndex = flipped.get() ? 63 - index : index;
         Node cell = board.getChildren().get(effectedIndex);
         piece.translateXProperty().bind(cell.layoutXProperty().subtract(piece.layoutXProperty()).add(Bindings.subtract(CELL_SIZE, piece.widthProperty()).divide(2)));
@@ -128,7 +131,7 @@ public class ChessDiagram extends Region {
     }
 
     public void flipBoard() {
-        flipped.setValue(flipped.getValue());
+        flipped.set(!flipped.get());
     }
 
     // Properties
