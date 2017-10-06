@@ -48,11 +48,11 @@ public class TopMenu extends BaseComponent {
     private MenuButton usersMenuButton;
 
     public TopMenu() {
-        super("net/averkhoglyad/chess/manager/gui/view/TopMenu.fxml");
+        super("net/averkhoglyad/chess/manager/gui/component/TopMenu.fxml");
     }
 
     public void initialize() {
-        fitToParentSize();
+        fitContentToComponentSize();
         noUsersMenuItem.visibleProperty().bind(Bindings.isEmpty(users));
         renderUserItems(users);
         users.addListener((ListChangeListener<? super User>) c -> renderUserItems(c.getList()));

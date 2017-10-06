@@ -4,39 +4,17 @@
 <?import javafx.scene.layout.*?>
 <?import net.averkhoglyad.chess.manager.gui.component.ChessDiagram?>
 <?import org.controlsfx.control.MasterDetailPane?>
+<?import net.averkhoglyad.chess.manager.gui.component.GamesTable?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml"
-            fx:id="editor" fx:controller="net.averkhoglyad.chess.manager.gui.controller.GamesController">
+            fx:controller="net.averkhoglyad.chess.manager.gui.controller.GamesController">
     <children>
         <MasterDetailPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
                           AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"
                           dividerPosition="0.65" animated="true">
             <detailSide>RIGHT</detailSide>
             <masterNode>
-                <TableView fx:id="gamesTable"
-                           AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                           AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                    <placeholder>
-                        <Label>No games</Label>
-                    </placeholder>
-                    <columnResizePolicy>
-                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
-                    </columnResizePolicy>
-                    <columns>
-                        <TableColumn fx:id="selectionColumn" resizable="false"
-                                     minWidth="28" maxWidth="28" prefWidth="28">
-                            <graphic>
-                                <CheckBox fx:id="selectionColumnCheckBox"/>
-                            </graphic>
-                        </TableColumn>
-                        <TableColumn fx:id="detailsColumn" resizable="false"
-                                     minWidth="28" maxWidth="28" prefWidth="28"/>
-                        <TableColumn fx:id="whitePlayerColumn" text="White" />
-                        <TableColumn fx:id="blackPlayerColumn" text="Black" />
-                        <TableColumn fx:id="turnsColumn" text="Turns" />
-                        <TableColumn fx:id="statusColumn" text="Status" />
-                        <TableColumn fx:id="finishedAtColumn" text="Finished" />
-                    </columns>
-                </TableView>
+                <GamesTable fx:id="gamesTable" onDisplayGame="#displayGame"
+                            onSelectGames="#selectGames" onDeselectGames="#deselectGames"></GamesTable>
             </masterNode>
             <detailNode>
                 <ScrollPane fitToWidth="true">

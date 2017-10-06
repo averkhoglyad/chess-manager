@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.Pane?>
+
+<?import javafx.scene.Group?>
+<fx:root type="javafx.scene.layout.Pane" xmlns:fx="http://javafx.com/fxml">
+    <children>
+        <TableView fx:id="gamesTable">
+            <placeholder>
+                <Group>
+                    <children>
+                        <Label visible="${!controller.loading}">No games</Label>
+                        <Label visible="${controller.loading}">Loading...</Label>
+                    </children>
+                </Group>
+            </placeholder>
+            <columnResizePolicy>
+                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+            </columnResizePolicy>
+            <columns>
+                <TableColumn fx:id="selectionColumn" resizable="false"
+                             minWidth="28" maxWidth="28" prefWidth="28">
+                    <graphic>
+                        <CheckBox fx:id="selectionColumnCheckBox"/>
+                    </graphic>
+                </TableColumn>
+                <TableColumn fx:id="detailsColumn" resizable="false"
+                             minWidth="28" maxWidth="28" prefWidth="28"/>
+                <TableColumn fx:id="whitePlayerColumn" text="White" />
+                <TableColumn fx:id="blackPlayerColumn" text="Black" />
+                <TableColumn fx:id="turnsColumn" text="Turns" />
+                <TableColumn fx:id="statusColumn" text="Status" />
+                <TableColumn fx:id="finishedAtColumn" text="Finished" />
+            </columns>
+        </TableView>
+    </children>
+</fx:root>
+

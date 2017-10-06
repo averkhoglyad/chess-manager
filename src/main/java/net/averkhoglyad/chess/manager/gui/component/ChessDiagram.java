@@ -74,7 +74,7 @@ public class ChessDiagram extends BaseComponent {
         buildBoardCells(board);
         fen.addListener((observable, oldValue, newValue) -> renderPieces(parseFen(newValue)));
         flipped.addListener((observable, oldValue, newValue) -> renderPieces(parseFen(fen.get())));
-        fitToParentSize();
+        fitContentToComponentSize();
     }
 
     private void buildBoardCells(GridPane board) {

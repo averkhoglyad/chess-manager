@@ -21,7 +21,7 @@ public abstract class BaseComponent extends Pane {
         runLater(() -> doStrict(() -> fxmlLoader.load()));
     }
 
-    protected final void fitToParentSize() {
+    protected final void fitContentToComponentSize() {
         getChildren().forEach(it -> {
             if (it instanceof Region) {
                 Region.class.cast(it).prefWidthProperty().bind(this.widthProperty());
