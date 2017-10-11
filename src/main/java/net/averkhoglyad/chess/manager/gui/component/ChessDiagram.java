@@ -124,8 +124,16 @@ public class ChessDiagram extends BaseComponent {
         piece.setText(PIECES_MAP.get(figure));
         int effectedIndex = flipped.get() ? 63 - index : index;
         Node cell = board.getChildren().get(effectedIndex);
-        piece.translateXProperty().bind(cell.layoutXProperty().subtract(piece.layoutXProperty()).add(Bindings.subtract(CELL_SIZE, piece.widthProperty()).divide(2)));
-        piece.translateYProperty().bind(cell.layoutYProperty().subtract(piece.layoutYProperty()).add(Bindings.subtract(CELL_SIZE, piece.heightProperty()).divide(2)));
+        piece.translateXProperty().bind(
+            cell.layoutXProperty()
+                .subtract(piece.layoutXProperty())
+                .add(Bindings.subtract(CELL_SIZE, piece.widthProperty()).divide(2))
+        );
+        piece.translateYProperty().bind(
+            cell.layoutYProperty()
+                .subtract(piece.layoutYProperty())
+                .add(Bindings.subtract(CELL_SIZE, piece.heightProperty()).divide(2))
+        );
         usedLabels.add(piece);
         diagram.getChildren().add(piece);
     }

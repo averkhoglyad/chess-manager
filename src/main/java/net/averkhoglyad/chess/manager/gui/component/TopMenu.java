@@ -74,6 +74,7 @@ public class TopMenu extends BaseComponent {
         return item;
     }
 
+    // Event Handlers
     public void selectUser(ActionEvent event) {
         MenuItem menuItem = MenuItem.class.cast(event.getSource());
         User selectedUser = User.class.cast(menuItem.getUserData());
@@ -196,4 +197,5 @@ public class TopMenu extends BaseComponent {
     public void setOnManageUsersClick(EventHandler<Event> onManageUsersClick) {
         this.onManageUsersClick.set(onManageUsersClick);
     }
+
 }

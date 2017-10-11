@@ -3,9 +3,12 @@ package net.averkhoglyad.chess.manager.core.sdk.http;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
-import net.averkhoglyad.chess.manager.core.helper.ExceptionHelper;
+import net.averkhoglyad.chess.manager.core.helper.IOStreamHelper;
+import net.averkhoglyad.chess.manager.core.helper.StringHelper;
 import org.apache.http.Header;
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpHeaders;
+import org.apache.http.StatusLine;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
 import org.apache.http.client.methods.HttpRequestBase;
@@ -17,36 +20,39 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
-import sun.misc.IOUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
+import java.nio.charset.Charset;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
+import static net.averkhoglyad.chess.manager.core.helper.ExceptionHelper.doQuiet;
+import static net.averkhoglyad.chess.manager.core.helper.ExceptionHelper.doStrict;
+
 @Slf4j
-public class WebClientImpl implements WebClient {
+public class JsonBasedWebClientImpl implements WebClient {
 
     private final ObjectMapper mapper;
     private final String endpointUrl;
 
-    public WebClientImpl(String endpointUrl) {
+    public JsonBasedWebClientImpl(String endpointUrl) {
         this(endpointUrl, new ObjectMapper());
     }
 
-    public WebClientImpl(String endpointUrl, ObjectMapper mapper) {
-        if (endpointUrl == null || endpointUrl.isEmpty()) {
-            throw new IllegalArgumentException("Argument `endpointUrl` is required and can't be null or empty String");
+    public JsonBasedWebClientImpl(String endpointUrl, ObjectMapper mapper) {
+        if (StringHelper.isBlank(endpointUrl)) {
+            throw new IllegalArgumentException("Argument `endpointUrl` is required and can't be null or blank.");
         }
         this.endpointUrl = endpointUrl;
         this.mapper = mapper;
     }
 
     @Override
-    public <R> R send(Request request) throws ErrorResponseException {
+    public <R> R send(Request request) throws ErrorResponseException, EmptyResponseException {
         try {
             return doSend(request);
         } catch (IOException e) {
@@ -54,7 +60,7 @@ public class WebClientImpl implements WebClient {
         }
     }
 
-    private <R> R doSend(Request request) throws ErrorResponseException, IOException {
+    private <R> R doSend(Request request) throws ErrorResponseException, IOException, EmptyResponseException {
         HttpRequestBase httpRequest = createHttpRequest(request);
         try (CloseableHttpClient httpClient = HttpClients.createDefault();
              CloseableHttpResponse httpResponse = httpClient.execute(httpRequest);
@@ -63,22 +69,35 @@ public class WebClientImpl implements WebClient {
             if (httpResponse.getStatusLine().getStatusCode() >= 400) {
                 throw createErrorResponse(httpResponse);
             }
-            Operation operation = request.getOperation();
-            if (log.isDebugEnabled()) {
-                String res = EntityUtils.toString(httpEntity);
-                log.debug("WebClient response:\n{}", res);
-                return (R) deserialize(operation.getResponseClass(), res);
-            } else {
-                return (R) deserialize(operation.getResponseClass(), httpEntity.getContent());
-            }
+            return parseResponse(request, httpResponse.getStatusLine(), httpEntity);
+        }
+    }
+
+    private <R> R parseResponse(Request request, StatusLine statusLine, HttpEntity httpEntity)
+        throws ErrorResponseException, EmptyResponseException, IOException {
+        if (statusLine.getStatusCode() >= 400) {
+            throw new ErrorResponseException(statusLine.getStatusCode(), statusLine.getReasonPhrase(),
+                doQuiet(() -> mapper.readValue(httpEntity.getContent(), Map.class)));
+        }
+        Operation operation = request.getOperation();
+        if (operation.getResponseClass() == Void.class) return null;
+        if (httpEntity.getContentLength() == 0) {
+            throw new EmptyResponseException(statusLine.getStatusCode(), statusLine.getReasonPhrase());
+        }
+        if (log.isDebugEnabled()) {
+            String res = EntityUtils.toString(httpEntity);
+            log.debug("WebClient response:\n{}", res);
+            return (R) deserialize(operation.getResponseClass(), res);
+        } else {
+            return (R) deserialize(operation.getResponseClass(), httpEntity.getContent());
         }
     }
 
     private <R> R deserialize(Class<R> targetClass, InputStream in) {
-        if (targetClass == String.class) {
-            return (R) new String(ExceptionHelper.doStrict(() -> IOUtils.readFully(in, -1, false)));
+        if (targetClass == String.class) { // TODO: Remove from WebClient. Find a better way to get response as String, byte[] or InputStream. Probably need some kinds of WebClient (json or xml based, raw, etc) or more low-level component for this.
+            return (R) doStrict(() -> IOStreamHelper.copyToString(in, Charset.defaultCharset()));
         } else {
-            return ExceptionHelper.doStrict(() -> mapper.readValue(in, targetClass));
+            return doStrict(() -> mapper.readValue(in, targetClass));
         }
     }
 
@@ -86,7 +105,7 @@ public class WebClientImpl implements WebClient {
         if (targetClass == String.class) {
             return (R) in;
         } else {
-            return ExceptionHelper.doStrict(() -> mapper.readValue(in, targetClass));
+            return doStrict(() -> mapper.readValue(in, targetClass));
         }
     }
 
@@ -101,7 +120,7 @@ public class WebClientImpl implements WebClient {
     }
 
     private URI buildUrl(String url, Map<String, ?> pathVariables, Map<String, List<String>> queryParams) {
-        URIBuilder builder = ExceptionHelper.doStrict(() -> new URIBuilder(endpointUrl));
+        URIBuilder builder = doStrict(() -> new URIBuilder(endpointUrl));
 
         String resultPath = url;
         for (Map.Entry<String, ?> entry : pathVariables.entrySet()) {
@@ -113,7 +132,7 @@ public class WebClientImpl implements WebClient {
             .flatMap(entry -> entry.getValue().stream().map(value -> new BasicNameValuePair(entry.getKey(), value)))
             .forEach(pair -> builder.addParameter(pair.getName(), pair.getValue()));
 
-        return ExceptionHelper.doStrict(() -> builder.build());
+        return doStrict(() -> builder.build());
     }
 
     private void applyRequestBody(Request request, Operation operation, HttpRequestBase httpRequest) throws JsonProcessingException {
@@ -143,7 +162,7 @@ public class WebClientImpl implements WebClient {
         return new ErrorResponseException(
             httpResponse.getStatusLine().getStatusCode(),
             httpResponse.getStatusLine().getReasonPhrase(),
-            ExceptionHelper.doQuiet(() -> mapper.readValue(httpResponse.getEntity().getContent(), Map.class))
+            doQuiet(() -> mapper.readValue(httpResponse.getEntity().getContent(), Map.class))
         );
     }
 

@@ -10,7 +10,7 @@ import net.averkhoglyad.chess.manager.core.sdk.data.PageResult;
 import net.averkhoglyad.chess.manager.core.sdk.data.User;
 import net.averkhoglyad.chess.manager.core.sdk.http.Request;
 import net.averkhoglyad.chess.manager.core.sdk.http.WebClient;
-import net.averkhoglyad.chess.manager.core.sdk.http.WebClientImpl;
+import net.averkhoglyad.chess.manager.core.sdk.http.JsonBasedWebClientImpl;
 import net.averkhoglyad.chess.manager.core.sdk.operation.GameOperation;
 import net.averkhoglyad.chess.manager.core.sdk.operation.UserOperation;
 
@@ -30,7 +30,7 @@ public class LichessIntegrationServiceImpl implements LichessIntegrationService 
         mapper.configure(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_AS_NULL, true);
         mapper.configure(DeserializationFeature.READ_DATE_TIMESTAMPS_AS_NANOSECONDS, false);
         mapper.registerModule(module);
-        client = new WebClientImpl("https://lichess.org", mapper);
+        client = new JsonBasedWebClientImpl("https://lichess.org", mapper);
     }
 
     @Override

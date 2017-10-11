@@ -23,7 +23,7 @@ excelsiorJet {
     hideConsole = true
     globalOptimizer = true
     splash = new File("src/main/jetresources/splash.jpg")
-    packaging = 'excelsior-installer'
+//    packaging = 'excelsior-installer'
     excelsiorInstaller {
         vendor = "AWer"
     }

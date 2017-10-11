@@ -1,7 +1,5 @@
 package net.averkhoglyad.chess.manager.gui.data;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableSet;
@@ -12,8 +10,6 @@ public class ApplicationModel {
 
     private ObservableList<User> users = FXCollections.observableArrayList();
     private ObservableSet<Game> selectedGames = FXCollections.observableSet();
-    private IntegerProperty currentPage = new SimpleIntegerProperty(0);
-    private IntegerProperty totalPages = new SimpleIntegerProperty(0);
 
     public ObservableList<User> getUsers() {
         return users;
@@ -22,32 +18,12 @@ public class ApplicationModel {
         this.users = users;
     }
 
-    public ObservableSet<Game> getSelectedGames() {
-        return selectedGames;
-    }
-    public void setSelectedGames(ObservableSet<Game> selectedGames) {
-        this.selectedGames = selectedGames;
-    }
-
-    public int getCurrentPage() {
-        return currentPage.get();
-    }
-    public IntegerProperty currentPageProperty() {
-        return currentPage;
-    }
-    public void setCurrentPage(int currentPage) {
-        this.currentPage.set(currentPage);
-    }
-
-    public int getTotalPages() {
-        return totalPages.get();
-    }
-    public IntegerProperty totalPagesProperty() {
-        return totalPages;
-    }
-    public void setTotalPages(int totalPages) {
-        this.totalPages.set(totalPages);
-    }
+//    public ObservableSet<Game> getSelectedGames() {
+//        return selectedGames;
+//    }
+//    public void setSelectedGames(ObservableSet<Game> selectedGames) {
+//        this.selectedGames = selectedGames;
+//    }
 
     // Singleton implementation
     public static final ApplicationModel getInstance() {

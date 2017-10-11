@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import net.averkhoglyad.chess.manager.gui.component.ChessDiagram?>
+<fx:root type="javafx.scene.layout.Pane" xmlns:fx="http://javafx.com/fxml">
+    <StackPane alignment="CENTER">
+        <children>
+            <Label fx:id="loadingLabel" text="Loading..."></Label>
+            <ScrollPane fx:id="contentBox" fitToWidth="true">
+                <content>
+                    <VBox alignment="TOP_CENTER">
+                        <ChessDiagram fx:id="diagram"></ChessDiagram>
+                        <Label fx:id="moves" wrapText="true"></Label>
+                    </VBox>
+                </content>
+            </ScrollPane>
+        </children>
+    </StackPane>
+</fx:root>

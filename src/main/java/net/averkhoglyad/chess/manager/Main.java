@@ -52,10 +52,9 @@ public class Main extends Application {
             log.error("Unexpected exception:", ex);
             AlertHelper.error(ex);
         });
-        this.primaryStage = primaryStage;
-        this.addUserStage = initAddUserStage(primaryStage);
         GlyphFontRegistry.register(new FontAwesome(getClass().getClassLoader().getResource("org/controlsfx/glyphfont/fontawesome-webfont.ttf").toString()));
-        initPrimaryStage(primaryStage);
+        this.primaryStage = initPrimaryStage(primaryStage);
+        this.addUserStage = initAddUserStage(primaryStage);
         bindViewEvents();
         primaryStage.show();
         Optional.ofNullable(SplashScreen.getSplashScreen()).ifPresent(SplashScreen::close);
@@ -98,7 +97,6 @@ public class Main extends Application {
     private void bindViewEvents() {
         ApplicationEventDispatcher.getInstance().on(ViewEvent.SHOW_IMPORT_FILE_POPUP, this::showPgnImportPopup);
         ApplicationEventDispatcher.getInstance().on(ViewEvent.SHOW_MANAGE_USERS_POPUP, () -> addUserStage.show());
-        ApplicationEventDispatcher.getInstance().on(ViewEvent.CLOSE_ADD_USER_POPUP, () -> addUserStage.close());
     }
 
     private void showPgnImportPopup(Object o) {

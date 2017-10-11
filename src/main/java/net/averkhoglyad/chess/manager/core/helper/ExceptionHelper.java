@@ -13,7 +13,7 @@ public abstract class ExceptionHelper {
 
     private static final String ERROR_MESSAGE = "Exception was suppressed:";
 
-    // Throws ValidationException on false assertion result
+    // Throws IllegalStateException on false assertion result
     public static void assertion(boolean result, String message) throws IllegalStateException {
         if (!result) {
             throw new IllegalStateException(message);

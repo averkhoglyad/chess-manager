@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.BorderPane?>
-
+<?import net.averkhoglyad.chess.manager.gui.component.GamePreview?>
+<?import net.averkhoglyad.chess.manager.gui.component.GamesTable?>
 <?import net.averkhoglyad.chess.manager.gui.component.TopMenu?>
+<?import org.controlsfx.control.MasterDetailPane?>
+<?import org.controlsfx.control.StatusBar?>
 <BorderPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="net.averkhoglyad.chess.manager.gui.controller.RootController"
             prefHeight="480" prefWidth="640">
@@ -17,9 +19,18 @@
         </TopMenu>
     </top>
     <center>
-        <fx:include source="Games.fxml"/>
+        <MasterDetailPane dividerPosition="0.65" animated="true">
+            <detailSide>RIGHT</detailSide>
+            <masterNode>
+                <GamesTable fx:id="gamesTable" onDisplayGame="#displayGame"
+                            onSelectGames="#selectGames" onDeselectGames="#deselectGames"/>
+            </masterNode>
+            <detailNode>
+                <GamePreview fx:id="gamePreview"/>
+            </detailNode>
+        </MasterDetailPane>
     </center>
     <bottom>
-        <fx:include source="StatusBar.fxml"/>
+        <StatusBar fx:id="statusBar" text=""/>
     </bottom>
 </BorderPane>

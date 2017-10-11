@@ -16,6 +16,7 @@ import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.util.Callback;
+import net.averkhoglyad.chess.manager.core.helper.CollectionHelper;
 import net.averkhoglyad.chess.manager.core.sdk.data.Color;
 import net.averkhoglyad.chess.manager.core.sdk.data.Game;
 import net.averkhoglyad.chess.manager.gui.data.GameVO;
@@ -38,11 +39,11 @@ public class GamesTable extends BaseComponent {
     private BooleanProperty loading = new SimpleBooleanProperty(this, "loading");
     private ObjectProperty<List<Game>> games = new SimpleObjectProperty<>(this, "games", Collections.emptyList());
     private ObjectProperty<Set<String>> selectedGames = new SimpleObjectProperty<>(this, "selectedGames", Collections.emptySet());
-    private ObjectProperty<Game> displayedGame = new SimpleObjectProperty(this, "displayedGame");
+    private ObjectProperty<Game> displayedGame = new SimpleObjectProperty<>(this, "displayedGame");
 
     private ObservableList<GameVO> gameVOs = FXCollections.observableArrayList();
 
-    // Event Handlers
+    // Events
     private ObjectProperty<EventHandler<DataEvent<Game>>> onDisplayGame = createHandler(DISPLAY_GAME);
     private ObjectProperty<EventHandler<DataListEvent<Game>>> onSelectGames = createHandler(SELECT_GAMES);
     private ObjectProperty<EventHandler<DataListEvent<Game>>> onDeselectGames = createHandler(DESELECT_GAMES);
@@ -82,7 +83,9 @@ public class GamesTable extends BaseComponent {
             games.get().stream()
                 .map(game -> new GameVO(game, selectedGames.get().contains(game.getId())))
                 .forEach(gameVOs::add);
-            selectionColumnCheckBox.setSelected(gameVOs.stream().allMatch(GameVO::isSelected));
+            selectionColumnCheckBox.setSelected(
+                CollectionHelper.isNotEmpty(gameVOs) && gameVOs.stream().allMatch(GameVO::isSelected)
+            );
         });
 
         selectedGames.addListener(evt -> {
@@ -97,6 +100,7 @@ public class GamesTable extends BaseComponent {
         selectionColumn.setCellFactory(column -> {
             CheckBoxTableCell<GameVO, Boolean> cell = new CheckBoxTableCell<>();
             cell.setOnMouseClicked(event -> {
+                @SuppressWarnings("unchecked")
                 CheckBoxTableCell<GameVO, Boolean> target = (CheckBoxTableCell<GameVO, Boolean>) event.getTarget();
                 int currentIndex = target.getIndex();
 
@@ -106,14 +110,13 @@ public class GamesTable extends BaseComponent {
                 if (event.isShiftDown()) {
                     int from = Integer.min(prevSelectedItemIndex, currentIndex);
                     int to = Integer.max(prevSelectedItemIndex, currentIndex);
-                    targetGames = new ArrayList<>();
+                    targetGames = new ArrayList<>(to - from + 1);
                     for (int i = from; i <= to; i++) {
                         GameVO vo = target.getTableView().getItems().get(i);
                         targetGames.add(vo.getGame());
                     }
                 } else {
-                    GameVO vo = clickedVO;
-                    Game game = vo.getGame();
+                    Game game = clickedVO.getGame();
                     targetGames = Collections.singletonList(game);
                 }
 
@@ -130,7 +133,6 @@ public class GamesTable extends BaseComponent {
         });
 
         selectionColumnCheckBox.disableProperty().bind(Bindings.isEmpty(gameVOs));
-
         selectionColumnCheckBox.setOnMouseClicked(o -> {
             boolean needSelect = selectionColumnCheckBox.isSelected();
             EventType<DataListEvent<Game>> eventType = needSelect ? SELECT_GAMES : DESELECT_GAMES;
@@ -161,6 +163,7 @@ public class GamesTable extends BaseComponent {
             cell.setAlignment(Pos.CENTER);
 
             cell.setOnMouseClicked(event -> {
+                @SuppressWarnings("unchecked")
                 TableCell<GameVO, Game> target = (TableCell<GameVO, Game>) event.getSource();
                 Game item = target.getItem();
                 fireEvent(new DataEvent<>(DISPLAY_GAME, item));
@@ -217,6 +220,7 @@ public class GamesTable extends BaseComponent {
         this.loading.set(loading);
     }
 
+    // Events
     public EventHandler<DataEvent<Game>> getOnDisplayGame() {
         return onDisplayGame.get();
     }

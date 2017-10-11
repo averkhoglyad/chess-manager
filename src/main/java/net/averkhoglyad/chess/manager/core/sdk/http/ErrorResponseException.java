@@ -1,25 +1,23 @@
 package net.averkhoglyad.chess.manager.core.sdk.http;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
-public class ErrorResponseException extends Exception {
+public class ErrorResponseException extends HttpStatusAwareException
+{
 
-    private final int statusCode;
-    private final Map<String, Object> meta;
+	private final Map<String, Object> meta;
 
-    public ErrorResponseException(int statusCode, String reasonPhrase, Map<String, Object> meta) {
-        super(reasonPhrase);
-        this.statusCode = statusCode;
-        this.meta = Collections.unmodifiableMap(meta);
-    }
+	public ErrorResponseException( int statusCode, String reasonPhrase, Map<String, Object> meta )
+	{
+		super( statusCode, reasonPhrase );
+		this.meta = Collections.unmodifiableMap( new HashMap<>( meta ) );
+	}
 
-    public int getStatusCode() {
-        return statusCode;
-    }
-
-    public Map<String, Object> getMeta() {
-        return meta;
-    }
+	public Map<String, Object> getMeta()
+	{
+		return meta;
+	}
 
 }
