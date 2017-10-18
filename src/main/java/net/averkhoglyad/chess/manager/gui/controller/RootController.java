@@ -142,7 +142,7 @@ public class RootController {
     public void importPgn(Event event) {
         popupFactory.fileChooser(".pgn", new Pair("PGN file", "*.pgn"))
             .showSaveDialog()
-            .map(it -> it.endsWith(".pgn") ? it : it.getParent().resolve(it.getFileName().toString() + ".pgn"))
+            .map(it -> it.getFileName().toString().endsWith(".pgn") ? it : it.getParent().resolve(it.getFileName().toString() + ".pgn"))
             .ifPresent(target -> {
                 if (Files.exists(target) && !Files.isWritable(target)) {
                     AlertHelper.error("Error on games import", "Target file is not writable.\nFix problem or select other file and try again");
