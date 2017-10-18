@@ -1,8 +1,10 @@
 package net.averkhoglyad.chess.manager.gui.component;
 
 import javafx.beans.binding.Bindings;
+import javafx.beans.property.ListProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -32,7 +34,7 @@ public class TopMenu extends BaseComponent {
     private SimpleIntegerProperty currentPage = new SimpleIntegerProperty(0);
     private SimpleIntegerProperty totalPages = new SimpleIntegerProperty(0);
     private SimpleIntegerProperty selectedGamesCount = new SimpleIntegerProperty(0);
-    private ObservableList<User> users = FXCollections.observableArrayList();
+    private ListProperty<User> users = new SimpleListProperty<>(FXCollections.observableArrayList());
 
     // Event Handlers
     private ObjectProperty<EventHandler<DataEvent<Integer>>> onChangePage = createHandler(CHANGE_PAGE);
@@ -141,10 +143,13 @@ public class TopMenu extends BaseComponent {
     }
 
     public ObservableList<User> getUsers() {
+        return users.get();
+    }
+    public ListProperty<User> usersProperty() {
         return users;
     }
     public void setUsers(ObservableList<User> users) {
-        this.users = users;
+        this.users.set(users);
     }
 
     // Events

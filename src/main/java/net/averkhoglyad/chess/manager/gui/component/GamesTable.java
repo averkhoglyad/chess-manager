@@ -3,8 +3,7 @@ package net.averkhoglyad.chess.manager.gui.component;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.*;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.collections.*;
 import javafx.event.EventHandler;
 import javafx.event.EventType;
 import javafx.fxml.FXML;
@@ -37,8 +36,8 @@ public class GamesTable extends BaseComponent {
 
     // Properties
     private BooleanProperty loading = new SimpleBooleanProperty(this, "loading");
-    private ObjectProperty<List<Game>> games = new SimpleObjectProperty<>(this, "games", Collections.emptyList());
-    private ObjectProperty<Set<String>> selectedGames = new SimpleObjectProperty<>(this, "selectedGames", Collections.emptySet());
+    private ListProperty<Game> games = new SimpleListProperty<>(this, "games", FXCollections.observableArrayList());
+    private SetProperty<String> selectedGames = new SimpleSetProperty<>(this, "selectedGames", FXCollections.observableSet());
     private ObjectProperty<Game> displayedGame = new SimpleObjectProperty<>(this, "displayedGame");
 
     private ObservableList<GameVO> gameVOs = FXCollections.observableArrayList();
@@ -77,7 +76,7 @@ public class GamesTable extends BaseComponent {
     public void initialize() {
         fitContentToComponentSize();
 
-        games.addListener(evt -> {
+        games.addListener((ListChangeListener<? super Game>) evt -> {
             prevSelectedItemIndex = 0;
             gameVOs.clear();
             games.get().stream()
@@ -88,7 +87,7 @@ public class GamesTable extends BaseComponent {
             );
         });
 
-        selectedGames.addListener(evt -> {
+        selectedGames.addListener((SetChangeListener<? super String>) evt -> {
             gameVOs.forEach(it -> it.setSelected(selectedGames.get().contains(it.getId())));
             selectionColumnCheckBox.setSelected(gameVOs.stream().allMatch(GameVO::isSelected));
         });
@@ -180,23 +179,23 @@ public class GamesTable extends BaseComponent {
     }
 
     // Properties
-    public List<Game> getGames() {
+    public ObservableList<Game> getGames() {
         return games.get();
     }
-    public ObjectProperty<List<Game>> gamesProperty() {
+    public ListProperty<Game> gamesProperty() {
         return games;
     }
-    public void setGames(List<Game> games) {
+    public void setGames(ObservableList<Game> games) {
         this.games.set(games);
     }
 
-    public Set<String> getSelectedGames() {
+    public ObservableSet<String> getSelectedGames() {
         return selectedGames.get();
     }
-    public ObjectProperty<Set<String>> selectedGamesProperty() {
+    public SetProperty<String> selectedGamesProperty() {
         return selectedGames;
     }
-    public void setSelectedGames(Set<String> selectedGames) {
+    public void setSelectedGames(ObservableSet<String> selectedGames) {
         this.selectedGames.set(selectedGames);
     }
 

@@ -35,7 +35,6 @@ import java.io.PrintStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -56,7 +55,7 @@ public class RootController {
     // Props
     private ObservableSet<Game> selectedGames = FXCollections.observableSet();
     private String currentUser;
-    private ObservableList<User> lichessUsers;
+    private ObservableList<User> profiles;
 
     // Nodes
     @FXML
@@ -82,11 +81,12 @@ public class RootController {
     }
 
     public void initialize() {
-        lichessUsers = FXCollections.observableList(profileService.load());
+        profiles = FXCollections.observableList(profileService.load());
+        profilesManager.setProfiles(profiles);
         profilesPopup = popupFactory.create("Manage profiles", profilesManager);
 
         // Top Menu
-        Bindings.bindContent(topMenu.getUsers(), lichessUsers);
+        Bindings.bindContent(topMenu.getUsers(), profiles);
         topMenu.currentPageProperty().bind(currentPage);
         topMenu.totalPagesProperty().bind(totalPages);
         topMenu.selectedGamesCountProperty().bind(Bindings.size(selectedGames));
@@ -96,13 +96,13 @@ public class RootController {
             gamesTable.setSelectedGames(
                 selectedGames.stream()
                     .map(Game::getId)
-                    .collect(Collectors.toSet())
+                    .collect(Collectors.toCollection(() -> FXCollections.observableSet()))
             ));
 
         currentPage.addListener((observable, oldValue, newValue) -> {
             if (newValue.intValue() < 1) return;
             clearDisplayedGame();
-            gamesTable.setGames(Collections.emptyList());
+            gamesTable.setGames(FXCollections.emptyObservableList());
             gamesTable.setLoading(true);
             Paging paging = Paging.builder()
                 .page(currentPage.get())
@@ -114,7 +114,7 @@ public class RootController {
                 {
                     clearDisplayedGame();
                     totalPages.set(res.getNbPages());
-                    gamesTable.setGames(res.getCurrentPageResults());
+                    gamesTable.setGames(FXCollections.observableList(res.getCurrentPageResults()));
                 }))
                 .exceptionally(e -> {
                     Platform.runLater(() -> AlertHelper.error(e));
@@ -194,7 +194,6 @@ public class RootController {
     }
 
     public void manageUsers(Event event) {
-        profilesManager.setLichessUsers(lichessUsers);
         profilesManager.reset();
         profilesPopup.show();
     }
@@ -238,22 +237,20 @@ public class RootController {
 
     public void addProfile(DataEvent<String> event) {
         String username = event.getValue();
-        boolean userAbsent = lichessUsers.stream()
+        boolean userAbsent = profiles.stream()
             .map(User::getUsername)
             .noneMatch(it -> it.equals(username));
         if (userAbsent)
         {
-            lichessUsers.add(new User(username));
-            profileService.save(lichessUsers);
-            profilesManager.setLichessUsers(lichessUsers);
+            profiles.add(new User(username));
+            profileService.save(profiles);
         }
     }
 
     public void dropProfile(DataEvent<User> event) {
         User user = event.getValue();
-        lichessUsers.removeIf(it -> it.getUsername().equals(user.getUsername()));
-        profileService.save(lichessUsers);
-        profilesManager.setLichessUsers(lichessUsers);
+        profiles.removeIf(it -> it.getUsername().equals(user.getUsername()));
+        profileService.save(profiles);
     }
 
 }

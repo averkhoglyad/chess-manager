@@ -1,8 +1,10 @@
 package net.averkhoglyad.chess.manager.gui.component;
 
+import javafx.beans.property.ListProperty;
 import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.event.EventType;
@@ -18,9 +20,6 @@ import net.averkhoglyad.chess.manager.gui.event.DataEvent;
 import org.controlsfx.glyphfont.FontAwesome;
 import org.controlsfx.glyphfont.Glyph;
 
-import java.util.Collections;
-import java.util.List;
-
 public class ProfilesManager extends BaseComponent {
 
     // Events
@@ -28,7 +27,7 @@ public class ProfilesManager extends BaseComponent {
     private static final EventType<DataEvent<User>> DROP_USER = new EventType<>("dropUser");
 
     // Properties
-    private ObjectProperty<List<User>> lichessUsers = new SimpleObjectProperty<>(this, "lichessUsers", Collections.emptyList());
+    private ListProperty<User> profiles = new SimpleListProperty<>(this, "lichessUsers", FXCollections.observableArrayList());
 
     // Event Handlers
     private ObjectProperty<EventHandler<DataEvent<String>>> onAddUser = createHandler(ADD_USER);
@@ -48,12 +47,7 @@ public class ProfilesManager extends BaseComponent {
 
     public void initialize() {
         BorderPane.setMargin(pane.getTop(), new Insets(5));
-        usersListView.setItems(FXCollections.observableArrayList());
-        if (lichessUsers.get() != null) {
-            usersListView.getItems().setAll(lichessUsers.get());
-        }
-        lichessUsers.addListener((observable, oldValue, newValue) ->
-            usersListView.getItems().setAll(lichessUsers.get()));
+        usersListView.itemsProperty().bind(profiles);
         usersListView.setCellFactory((ListView<User> view) -> new ListCell<User>() {
 
             final Label label = new Label();
@@ -109,14 +103,14 @@ public class ProfilesManager extends BaseComponent {
     }
 
     // Properties
-    public List<User> getLichessUsers() {
-        return lichessUsers.get();
+    public ObservableList<User> getProfiles() {
+        return profiles.get();
     }
-    public ObjectProperty<List<User>> lichessUsersProperty() {
-        return lichessUsers;
+    public ListProperty<User> profilesProperty() {
+        return profiles;
     }
-    public void setLichessUsers(List<User> lichessUsers) {
-        this.lichessUsers.set(lichessUsers);
+    public void setProfiles(ObservableList<User> profiles) {
+        this.profiles.set(profiles);
     }
 
     // Event Handlers
