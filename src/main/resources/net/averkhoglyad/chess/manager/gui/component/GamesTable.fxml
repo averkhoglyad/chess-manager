@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.Pane?>
 
 <?import javafx.scene.Group?>
-<fx:root type="javafx.scene.layout.Pane" xmlns:fx="http://javafx.com/fxml">
+<fx:root type="net.averkhoglyad.chess.manager.gui.component.GamesTable" xmlns:fx="http://javafx.com/fxml">
     <children>
         <TableView fx:id="gamesTable">
             <placeholder>

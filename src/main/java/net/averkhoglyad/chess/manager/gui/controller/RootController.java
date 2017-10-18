@@ -5,23 +5,28 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.collections.ObservableSet;
 import javafx.collections.SetChangeListener;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.stage.Stage;
+import javafx.util.Pair;
 import net.averkhoglyad.chess.manager.core.data.Paging;
 import net.averkhoglyad.chess.manager.core.sdk.data.Color;
 import net.averkhoglyad.chess.manager.core.sdk.data.Game;
 import net.averkhoglyad.chess.manager.core.sdk.data.Player;
 import net.averkhoglyad.chess.manager.core.sdk.data.User;
 import net.averkhoglyad.chess.manager.core.service.LichessIntegrationService;
-import net.averkhoglyad.chess.manager.core.service.LichessIntegrationServiceImpl;
+import net.averkhoglyad.chess.manager.core.service.ProfileService;
 import net.averkhoglyad.chess.manager.gui.component.GamePreview;
 import net.averkhoglyad.chess.manager.gui.component.GamesTable;
+import net.averkhoglyad.chess.manager.gui.component.ProfilesManager;
 import net.averkhoglyad.chess.manager.gui.component.TopMenu;
-import net.averkhoglyad.chess.manager.gui.data.ApplicationModel;
-import net.averkhoglyad.chess.manager.gui.event.*;
+import net.averkhoglyad.chess.manager.gui.event.DataCollectionEvent;
+import net.averkhoglyad.chess.manager.gui.event.DataEvent;
 import net.averkhoglyad.chess.manager.gui.view.AlertHelper;
+import net.averkhoglyad.chess.manager.gui.view.PopupFactory;
 import org.controlsfx.control.StatusBar;
 
 import java.io.IOException;
@@ -44,10 +49,14 @@ public class RootController {
 
     private static final int PAGE_SIZE = 25;
 
+    private final PopupFactory popupFactory;
+    private final LichessIntegrationService lichessService;
+    private final ProfileService profileService;
+
     // Props
-    private LichessIntegrationService lichessService = new LichessIntegrationServiceImpl();
     private ObservableSet<Game> selectedGames = FXCollections.observableSet();
     private String currentUser;
+    private ObservableList<User> lichessUsers;
 
     // Nodes
     @FXML
@@ -58,69 +67,31 @@ public class RootController {
     private GamePreview gamePreview;
     @FXML
     private StatusBar statusBar;
+    @FXML
+    private ProfilesManager profilesManager;
 
-    // TODO: Remove deprecated singletons
-    private final ApplicationEventDispatcher eventDispatcher = ApplicationEventDispatcher.getInstance();
-    private final ApplicationModel applicationModel = ApplicationModel.getInstance();
+    private Stage profilesPopup;
 
     private final IntegerProperty currentPage = new SimpleIntegerProperty(0);
     private final IntegerProperty totalPages = new SimpleIntegerProperty(0);
 
+    public RootController(PopupFactory popupFactory, LichessIntegrationService lichessService, ProfileService profileService) {
+        this.popupFactory = popupFactory;
+        this.lichessService = lichessService;
+        this.profileService = profileService;
+    }
+
     public void initialize() {
+        lichessUsers = FXCollections.observableList(profileService.load());
+        profilesPopup = popupFactory.create("Manage profiles", profilesManager);
 
         // Top Menu
-        Bindings.bindContent(topMenu.getUsers(), applicationModel.getUsers());
+        Bindings.bindContent(topMenu.getUsers(), lichessUsers);
         topMenu.currentPageProperty().bind(currentPage);
         topMenu.totalPagesProperty().bind(totalPages);
         topMenu.selectedGamesCountProperty().bind(Bindings.size(selectedGames));
 
         // Games
-        eventDispatcher.on(FileEvent.IMPORT_PGN, (Object o) -> {
-            Path targetPath = (Path) o;
-            if (Files.exists(targetPath) && !Files.isWritable(targetPath)) {
-                AlertHelper.error("Error on games import", "Target file is not writable. Fix problem or select other file and try again");
-                return;
-            }
-
-            statusBar.setText("Importing selected games");
-            SimpleIntegerProperty progress = new SimpleIntegerProperty(0);
-            List<Game> targetGames = new ArrayList<>(selectedGames);
-            double total = targetGames.size();
-            statusBar.progressProperty().bind(
-                Bindings.when(progress.isEqualTo(0)).then(total / 1000).otherwise(progress.divide(total))
-            );
-            selectedGames.clear();
-
-            CompletableFuture.runAsync(() -> {
-                Path tempPath = doStrict(() -> Files.createTempFile("lichess.", ".pgn"));
-                try (OutputStream outputStream = Files.newOutputStream(tempPath);
-                     PrintStream tempFilePrint = new PrintStream(outputStream)) {
-                    AtomicInteger inc = new AtomicInteger();
-                    targetGames.stream()
-                        .sorted(Comparator.comparing(Game::getCreatedAt))
-                        .map(game -> lichessService.loadGamePgn(game.getId()))
-                        .forEachOrdered(pgn -> {
-                            tempFilePrint.println(pgn);
-                            tempFilePrint.println();
-                            tempFilePrint.println();
-                            Platform.runLater(() -> progress.set(inc.incrementAndGet()));
-                        });
-                    tempFilePrint.flush();
-                    Files.deleteIfExists(targetPath);
-                    Files.copy(tempPath, targetPath);
-                } catch (IOException e) {
-                    Platform.runLater(() -> AlertHelper.error(e));
-                } finally {
-                    doQuiet(() -> Files.delete(tempPath));
-                    Platform.runLater(() -> {
-                        statusBar.progressProperty().unbind();
-                        statusBar.progressProperty().set(0);
-                        statusBar.setText("");
-                    });
-                }
-            });
-        });
-
         selectedGames.addListener((SetChangeListener<? super Game>) c ->
             gamesTable.setSelectedGames(
                 selectedGames.stream()
@@ -169,7 +140,53 @@ public class RootController {
     }
 
     public void importPgn(Event event) {
-        eventDispatcher.trigger(ViewEvent.SHOW_IMPORT_FILE_POPUP, FileEvent.IMPORT_PGN);
+        popupFactory.fileChooser(".pgn", new Pair("PGN file", "*.pgn"))
+            .showSaveDialog()
+            .map(it -> it.endsWith(".pgn") ? it : it.getParent().resolve(it.getFileName().toString() + ".pgn"))
+            .ifPresent(target -> {
+                if (Files.exists(target) && !Files.isWritable(target)) {
+                    AlertHelper.error("Error on games import", "Target file is not writable.\nFix problem or select other file and try again");
+                    return;
+                }
+
+                statusBar.setText("Importing selected games");
+                SimpleIntegerProperty progress = new SimpleIntegerProperty(0);
+                List<Game> targetGames = new ArrayList<>(selectedGames);
+                double total = targetGames.size();
+                statusBar.progressProperty().bind(
+                    Bindings.when(progress.isEqualTo(0)).then(total / 1000).otherwise(progress.divide(total))
+                );
+                selectedGames.clear();
+
+                CompletableFuture.runAsync(() -> {
+                    Path tempPath = doStrict(() -> Files.createTempFile("lichess.", ".pgn"));
+                    try (OutputStream outputStream = Files.newOutputStream(tempPath);
+                         PrintStream tempFilePrint = new PrintStream(outputStream)) {
+                        AtomicInteger inc = new AtomicInteger();
+                        targetGames.stream()
+                            .sorted(Comparator.comparing(Game::getCreatedAt))
+                            .map(game -> lichessService.loadGamePgn(game.getId()))
+                            .forEachOrdered(pgn -> {
+                                tempFilePrint.println(pgn);
+                                tempFilePrint.println();
+                                tempFilePrint.println();
+                                Platform.runLater(() -> progress.set(inc.incrementAndGet()));
+                            });
+                        tempFilePrint.flush();
+                        Files.deleteIfExists(target);
+                        Files.copy(tempPath, target);
+                    } catch (IOException e) {
+                        Platform.runLater(() -> AlertHelper.error(e));
+                    } finally {
+                        doQuiet(() -> Files.delete(tempPath));
+                        Platform.runLater(() -> {
+                            statusBar.progressProperty().unbind();
+                            statusBar.progressProperty().set(0);
+                            statusBar.setText("");
+                        });
+                    }
+                });
+            });
     }
 
     public void clearSelectedGames(Event event) {
@@ -177,7 +194,9 @@ public class RootController {
     }
 
     public void manageUsers(Event event) {
-        eventDispatcher.trigger(ViewEvent.SHOW_MANAGE_USERS_POPUP);
+        profilesManager.setLichessUsers(lichessUsers);
+        profilesManager.reset();
+        profilesPopup.show();
     }
 
     private void clearDisplayedGame() {
@@ -215,6 +234,26 @@ public class RootController {
 
     public void deselectGames(DataCollectionEvent<Game, ?> event) {
         selectedGames.removeAll(event.getValue());
+    }
+
+    public void addProfile(DataEvent<String> event) {
+        String username = event.getValue();
+        boolean userAbsent = lichessUsers.stream()
+            .map(User::getUsername)
+            .noneMatch(it -> it.equals(username));
+        if (userAbsent)
+        {
+            lichessUsers.add(new User(username));
+            profileService.save(lichessUsers);
+            profilesManager.setLichessUsers(lichessUsers);
+        }
+    }
+
+    public void dropProfile(DataEvent<User> event) {
+        User user = event.getValue();
+        lichessUsers.removeIf(it -> it.getUsername().equals(user.getUsername()));
+        profileService.save(lichessUsers);
+        profilesManager.setLichessUsers(lichessUsers);
     }
 
 }

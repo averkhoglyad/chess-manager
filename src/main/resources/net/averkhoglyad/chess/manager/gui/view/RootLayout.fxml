@@ -3,12 +3,20 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import net.averkhoglyad.chess.manager.gui.component.GamePreview?>
 <?import net.averkhoglyad.chess.manager.gui.component.GamesTable?>
+<?import net.averkhoglyad.chess.manager.gui.component.ProfilesManager?>
 <?import net.averkhoglyad.chess.manager.gui.component.TopMenu?>
 <?import org.controlsfx.control.MasterDetailPane?>
 <?import org.controlsfx.control.StatusBar?>
 <BorderPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="net.averkhoglyad.chess.manager.gui.controller.RootController"
             prefHeight="480" prefWidth="640">
+
+    <fx:define>
+        <ProfilesManager fx:id="profilesManager"
+                         onAddUser="#addProfile"
+                         onDropUser="#dropProfile"/>
+    </fx:define>
+
     <top>
         <TopMenu fx:id="topMenu"
                  onChangePage="#changePage"

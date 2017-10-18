@@ -15,8 +15,7 @@ import static javafx.scene.control.Alert.AlertType.*;
 
 public abstract class AlertHelper {
 
-    private AlertHelper() {
-    }
+    private AlertHelper() {}
 
     public static Alert error(Throwable e) {
         return error(e.getMessage(), null, e);

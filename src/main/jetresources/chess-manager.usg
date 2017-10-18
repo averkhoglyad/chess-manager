@@ -34,6 +34,7 @@ com/sun/proxy/$Proxy13 00000000000000000001010000000000
 com/sun/proxy/$Proxy14 00000000000000000001010000000000
 com/sun/proxy/$Proxy15 00000000000000000001010000000000
 org/apache/commons/logging/LogFactory$1 00000000000000000000110000000000
+javafx/collections/FXCollections.observableList(Ljava/util/List;)Ljavafx/collections/ObservableList; 00000000000000000000000101111100
 org/apache/commons/logging/LogFactory$2 00000000000000000000110000000000
 com/sun/proxy/$Proxy16 00000000000000000001010000000000
 com/sun/org/apache/xerces/internal/util/XMLAttributesImpl$Attribute.<init>()V 00000000000000000000000101111100
@@ -200,6 +201,7 @@ com/fasterxml/jackson/databind/util/StdDateFormat 000000000000000000011000000000
 net/averkhoglyad/chess/manager/gui/component/ChessDiagram$$Lambda$72 00000000000000000000010000000000
 javafx/scene/control/Label.<init>()V 00000000000000000000000101111100
 com/sun/javafx/font/directwrite/DWRITE_GLYPH_RUN.glyphIndices@S 00000000000000001110000000010010
+net/averkhoglyad/chess/manager/gui/component/ChessDiagram$$Lambda$73 00000000000000000000010000000000
 org/slf4j/spi/MDCAdapter 00000000000000000000100000000000
 java/lang/reflect/WeakCache$CacheKey 00000000000000000001000000000000
 com/sun/glass/ui/win/WinGestureSupport.notifyBeginTouchEvent(Lcom/sun/glass/ui/View;IZI)V 00000000000000000000000001100010
@@ -253,6 +255,7 @@ java/io/IOException 00000000000000000000100000000000
 com/excelsior/jet/runtime/k51 00000000000000000001000000000000
 sun/util/resources/ru/CurrencyNames_ru_RU.<init>()V 00000000000000000000000101111100
 com/excelsior/jet/runtime/k59 00000000000000000001000000000000
+net/averkhoglyad/chess/manager/Main.lambda$start$1()V 00000000000000000000000101111100
 java/time/temporal/TemporalAdjuster 00000000000000000000100000000000
 net/averkhoglyad/chess/manager/core/sdk/http/WebClient 00000000000000000000100000000000
 com/fasterxml/jackson/databind/cfg/ContextAttributes.getEmpty()Lcom/fasterxml/jackson/databind/cfg/ContextAttributes; 00000000000000000000000101111100
@@ -440,6 +443,7 @@ com/fasterxml/jackson/core/JsonGenerator$Feature 0000000000000000000110000000000
 java/net/InetAddress.getAllByName(Ljava/lang/String;)[Ljava/net/InetAddress; 00000000000000000000000101111100
 javafx/scene/control/ContentDisplay 00000000000000000001000000000000
 java/lang/String.endsWith(Ljava/lang/String;)Z 00000000000000000000000101111100
+net/averkhoglyad/chess/manager/gui/component/LichessUsersManager.lambda$initialize$0(Ljavafx/scene/control/ListView;)Ljavafx/scene/control/ListCell; 00000000000000000000000101111100
 com/sun/javafx/geom/transform/GeneralTransform3D 00000000000000000001000000000000
 sun/security/rsa/SunRsaSign.<init>()V 00000000000000000000000101111100
 java/io/InterruptedIOException 00000000000000000000100000000000
@@ -604,6 +608,7 @@ ch/qos/logback/core/pattern/color/GreenCompositeConverter 0000000000000000000010
 sun/nio/fs/WindowsSecurityDescriptor 00000000000000000001000000000000
 org/apache/http/impl/auth/HttpAuthenticator$1 00000000000000000001100000000000
 org/apache/http/io/HttpMessageWriterFactory 00000000000000000000100000000000
+net/averkhoglyad/chess/manager/gui/component/GamesTable$$Lambda$71.<init>()V 00000000000000000000000101111100
 org/apache/http/impl/io/SessionOutputBufferImpl.flush()V 00000000000000000000000101111100
 org/xml/sax/InputSource.getCharacterStream()Ljava/io/Reader; 00000000000000000000000101111100
 com/sun/org/apache/xerces/internal/impl/dtd/XMLElementDecl.<init>()V 00000000000000000000000101111100
@@ -744,6 +749,7 @@ com/sun/org/apache/xerces/internal/xni/XMLDTDContentModelHandler 000000000000000
 com/fasterxml/jackson/annotation/JsonInclude$Value.empty()Lcom/fasterxml/jackson/annotation/JsonInclude$Value; 00000000000000000000000101111100
 com/sun/org/apache/xerces/internal/parsers/AbstractSAXParser$AttributesProxy.setAttributes(Lcom/sun/org/apache/xerces/internal/xni/XMLAttributes;)V 00000000000000000000000101111100
 com/sun/org/apache/xerces/internal/impl/XMLDocumentFragmentScannerImpl.getPIData()Lcom/sun/org/apache/xerces/internal/util/XMLStringBuffer; 00000000000000000000000101111100
+net/averkhoglyad/chess/manager/Main.lambda$initAddUserStage$7(Lnet/averkhoglyad/chess/manager/gui/component/LichessUsersManager;Ljavafx/stage/WindowEvent;)V 00000000000000000000000101111100
 ch/qos/logback/core/pattern/color/RedCompositeConverter 00000000000000000000100000000000
 sun/security/util/DerInputStream.getBigInteger()Ljava/math/BigInteger; 00000000000000000000000101111100
 com/sun/prism/PresentableState 00000000000000000001000000000000
@@ -816,6 +822,7 @@ ch/qos/logback/classic/spi/PlatformInfo.hasJMXObjectName()Z 00000000000000000000
 com/fasterxml/jackson/annotation/PropertyAccessor 00000000000000000001100000000000
 sun/security/ec/SunEC$1 00000000000000000000110000000000
 java/lang/String.substring(II)Ljava/lang/String; 00000000000000000000000101111100
+net/averkhoglyad/chess/manager/gui/service/ProfileService.save(Ljava/util/List;)V 00000000000000000000000101111100
 com/fasterxml/jackson/databind/util/LRUMap 00000000000000000000110000000000
 com/sun/scenario/effect/impl/prism/ps/PPSLinearConvolveShadowPeer.<init>(Lcom/sun/scenario/effect/FilterContext;Lcom/sun/scenario/effect/impl/Renderer;Ljava/lang/String;)V 00000000000000000000000101111100
 com/fasterxml/jackson/databind/JavaType.equals(Ljava/lang/Object;)Z 00000000000000000000000101111100
@@ -977,6 +984,7 @@ org/apache/http/client/utils/URIBuilder.setFragment(Ljava/lang/String;)Lorg/apac
 java/security/MessageDigest.update([BII)V 00000000000000000000000101111100
 org/apache/http/client/NonRepeatableRequestException 00000000000000000000100000000000
 org/apache/http/impl/cookie/RFC2965DomainAttributeHandler.<init>()V 00000000000000000000000101111100
+net/averkhoglyad/chess/manager/gui/component/LichessUsersManager.addLichessUser(Ljavafx/event/ActionEvent;)V 00000000000000000000000101111100
 ch/qos/logback/core/joran/action/NestedBasicPropertyIA.<init>(Lch/qos/logback/core/joran/util/beans/BeanDescriptionCache;)V 00000000000000000000000101111100
 sun/security/provider/DSAPublicKeyImpl.<init>([B)V 00000000000000000000000101111100
 com/sun/org/apache/xerces/internal/xni/XMLLocator.getLineNumber()I 00000000000000000000000101111100
@@ -1041,6 +1049,7 @@ net/averkhoglyad/chess/manager/gui/controller/AddUserPopupController.lambda$addL
 com/sun/javafx/effect/EffectDirtyBits 00000000000000000001000000000000
 sun/security/ec/NamedCurve.getEncoded()[B 00000000000000000000000101111100
 com/excelsior/jet/runtime/m34 00000000000000000001000000000000
+net/averkhoglyad/chess/manager/Main$$Lambda$50 00000000000000000000010000000000
 ch/qos/logback/core/rolling/helper/DateTokenConverter.<init>()V 00000000000000000000000101111100
 net/averkhoglyad/chess/manager/core/sdk/data/Player.setUserId(Ljava/lang/String;)V 00000000000000000000000101111100
 com/sun/crypto/provider/CounterMode 00000000000000000000100000000000
@@ -1139,6 +1148,7 @@ ch/qos/logback/core/util/COWArrayList.<init>([Ljava/lang/Object;)V 0000000000000
 com/fasterxml/jackson/databind/JavaType.hasHandlers()Z 00000000000000000000000101111100
 javafx/scene/input/KeyEvent$2 00000000000000000001000000000000
 sun/text/normalizer/NormalizerBase$1 00000000000000000001000000000000
+net/averkhoglyad/chess/manager/gui/service/ProfileServiceImpl.lambda$load$0()Ljava/util/stream/Stream; 00000000000000000000000101111100
 javafx/beans/binding/NumberExpression.divide(I)Ljavafx/beans/binding/NumberBinding; 00000000000000000000000101111100
 javax/net/ssl/SSLSession.getLocalPrincipal()Ljava/security/Principal; 00000000000000000000000101111100
 java/io/FileOutputStream 00000000000000000000110000000000
@@ -1152,6 +1162,7 @@ java/util/concurrent/CopyOnWriteArrayList 00000000000000000001110000000000
 impl/org/controlsfx/skin/MasterDetailPaneSkin$2.<init>(Limpl/org/controlsfx/skin/MasterDetailPaneSkin;)V 00000000000000000000000101111100
 com/fasterxml/jackson/databind/cfg/BaseSettings.getPropertyNamingStrategy()Lcom/fasterxml/jackson/databind/PropertyNamingStrategy; 00000000000000000000000101111100
 org/apache/http/conn/UnsupportedSchemeException 00000000000000000000100000000000
+net/averkhoglyad/chess/manager/Main.lambda$initAddUserStage$4(Ljava/util/List;Lnet/averkhoglyad/chess/manager/gui/component/LichessUsersManager;Lnet/averkhoglyad/chess/manager/gui/event/DataEvent;)V 00000000000000000000000101111100
 sun/security/provider/certpath/UntrustedChecker 00000000000000000001110000000000
 com/sun/javafx/scene/control/skin/ProgressIndicatorSkin 00000000000000000001000000000000
 sun/nio/fs/WindowsNativeDispatcher$BackupResult.bytesTransferred@I 00000000000000001110000000010010
@@ -1220,6 +1231,7 @@ net/averkhoglyad/chess/manager/gui/controller/RootController.lambda$null$10(Ljav
 javafx/scene/transform/Rotate 00000000000000000001000000000000
 com/fasterxml/jackson/databind/ser/impl/PropertyBasedObjectIdGenerator 00000000000000000000100000000000
 com/fasterxml/jackson/databind/AnnotationIntrospector.findUnwrappingNameTransformer(Lcom/fasterxml/jackson/databind/introspect/AnnotatedMember;)Lcom/fasterxml/jackson/databind/util/NameTransformer; 00000000000000000000000101111100
+com/fasterxml/jackson/datatype/jsr310/ser/OffsetDateTimeSerializer$$Lambda$27.<init>()V 00000000000000000000000101111100
 com/fasterxml/jackson/databind/DeserializationConfig.introspectForCreation(Lcom/fasterxml/jackson/databind/JavaType;)Lcom/fasterxml/jackson/databind/BeanDescription; 00000000000000000000000101111100
 com/fasterxml/jackson/databind/deser/Deserializers.findEnumDeserializer(Ljava/lang/Class;Lcom/fasterxml/jackson/databind/DeserializationConfig;Lcom/fasterxml/jackson/databind/BeanDescription;)Lcom/fasterxml/jackson/databind/JsonDeserializer; 00000000000000000000000101111100
 org/apache/http/config/SocketConfig$Builder 00000000000000000000110000000000
@@ -1321,6 +1333,7 @@ java/util/concurrent/ThreadLocalRandom 00000000000000000001000000000000
 com/fasterxml/jackson/databind/BeanDescription.findDefaultViews()[Ljava/lang/Class; 00000000000000000000000101111100
 com/fasterxml/jackson/databind/cfg/DeserializerFactoryConfig 00000000000000000001110000000000
 java/security/spec/DSAPublicKeySpec 00000000000000000000100000000000
+net/averkhoglyad/chess/manager/gui/component/LichessUsersManager.initialize()V 00000000000000000000000101111100
 org/apache/http/client/protocol/HttpClientContext.getTargetAuthState()Lorg/apache/http/auth/AuthState; 00000000000000000000000101111100
 net/averkhoglyad/chess/manager/core/sdk/http/WebClientImpl$$Lambda$82.<init>()V 00000000000000000000000101111100
 javafx/scene/text/TextAlignment.values()[Ljavafx/scene/text/TextAlignment; 00000000000000000000000101111100
@@ -1530,8 +1543,8 @@ com/sun/org/apache/xerces/internal/parsers/AbstractSAXParser$LocatorProxy 000000
 org/controlsfx/control/MasterDetailPane.detailSideProperty()Ljavafx/beans/property/ObjectProperty; 00000000000000000000000101111100
 sun/security/provider/certpath/PKIX.checkParams(Ljava/security/cert/CertPath;Ljava/security/cert/CertPathParameters;)Lsun/security/provider/certpath/PKIX$ValidatorParams; 00000000000000000000000101111100
 ch/qos/logback/core/pattern/util/RegularEscapeUtil.<init>()V 00000000000000000000000101111100
-net/averkhoglyad/chess/manager/core/helper/StringHelper.isEmpty(Ljava/lang/CharSequence;)Z 00000000000000000000000101111100
 sun/security/util/DerOutputStream 00000000000000000001110000000000
+net/averkhoglyad/chess/manager/core/helper/StringHelper.isEmpty(Ljava/lang/CharSequence;)Z 00000000000000000000000101111100
 ch/qos/logback/classic/Logger.createChildByName(Ljava/lang/String;)Lch/qos/logback/classic/Logger; 00000000000000000000000101111100
 com/sun/javafx/application/ParametersImpl 00000000000000000001000000000000
 com/fasterxml/jackson/databind/deser/impl/BeanPropertyMap.construct(Ljava/util/Collection;ZLjava/util/Map;)Lcom/fasterxml/jackson/databind/deser/impl/BeanPropertyMap; 00000000000000000000000101111100
@@ -1699,6 +1712,7 @@ com/fasterxml/jackson/databind/BeanProperty.getMetadata()Lcom/fasterxml/jackson/
 sun/nio/fs/WindowsNativeDispatcher$VolumeInformation.flags@I 00000000000000001110000000010010
 com/fasterxml/jackson/databind/Module$SetupContext.addSerializers(Lcom/fasterxml/jackson/databind/ser/Serializers;)V 00000000000000000000000101111100
 ch/qos/logback/core/status/InfoStatus.<init>(Ljava/lang/String;Ljava/lang/Object;)V 00000000000000000000000101111100
+net/averkhoglyad/chess/manager/gui/component/LichessUsersManager$1.<init>(Lnet/averkhoglyad/chess/manager/gui/component/LichessUsersManager;)V 00000000000000000000000101111100
 com/sun/crypto/provider/TlsPrfGenerator.concat([B[B)[B 00000000000000000000000101111100
 org/apache/http/client/utils/URIBuilder.setPort(I)Lorg/apache/http/client/utils/URIBuilder; 00000000000000000000000101111100
 javafx/scene/text/FontWeight.values()[Ljavafx/scene/text/FontWeight; 00000000000000000000000101111100
@@ -1776,6 +1790,7 @@ com/sun/org/apache/xerces/internal/utils/XMLSecurityPropertyManager.getValue(Lco
 javax/net/ssl/SSLSocketFactory.createSocket(Ljava/net/Socket;Ljava/lang/String;IZ)Ljava/net/Socket; 00000000000000000000000101111100
 com/fasterxml/jackson/databind/MapperFeature.values()[Lcom/fasterxml/jackson/databind/MapperFeature; 00000000000000000000000101111100
 java/util/Currency$CurrencyNameGetter 00000000000000000001000000000000
+net/averkhoglyad/chess/manager/Main.lambda$start$0()Ljava/nio/file/Path; 00000000000000000000000101111100
 java/lang/invoke/InfoFromMemberName 00000000000000000001000000000000
 org/apache/http/auth/AuthenticationException 00000000000000000000100000000000
 java/util/HashMap.remove(Ljava/lang/Object;)Ljava/lang/Object; 00000000000000000000000101111100
@@ -1821,6 +1836,7 @@ javafx/scene/Group 00000000000000000000010000000000
 org/apache/http/util/VersionInfo.getUserAgent(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Class;)Ljava/lang/String; 00000000000000000000000101111100
 ch/qos/logback/core/Context.getProperty(Ljava/lang/String;)Ljava/lang/String; 00000000000000000000000101111100
 ch/qos/logback/core/joran/action/ParamAction 00000000000000000001110000000000
+net/averkhoglyad/chess/manager/gui/component/LichessUsersManager$1 00000000000000000000110000000000
 net/averkhoglyad/chess/manager/core/sdk/http/Verb$5.<init>(Ljava/lang/String;I)V 00000000000000000000000101111100
 com/sun/prism/d3d/D3DTexture$1 00000000000000000001000000000000
 com/fasterxml/jackson/core/sym/CharsToNameCanonicalizer$Bucket 00000000000000000000100000000000
@@ -1893,6 +1909,7 @@ java/util/zip/Inflater 00000000000000000001000000000000
 org/apache/http/HttpEntity.getContentEncoding()Lorg/apache/http/Header; 00000000000000000000000101111100
 com/sun/org/apache/xerces/internal/xni/NamespaceContext.declarePrefix(Ljava/lang/String;Ljava/lang/String;)Z 00000000000000000000000101111100
 java/lang/NoSuchFieldError 00000000000000000000100000000000
+net/averkhoglyad/chess/manager/gui/component/LichessUsersManager.setOnAddUser(Ljavafx/event/EventHandler;)V 00000000000000000000000101111100
 java/time/format/DateTimeFormatterBuilder.appendValue(Ljava/time/temporal/TemporalField;IILjava/time/format/SignStyle;)Ljava/time/format/DateTimeFormatterBuilder; 00000000000000000000000101111100
 java/time/format/DateTimeFormatterBuilder 00000000000000000001110000000000
 com/excelsior/jet/runtime/o51 00000000000000000001000000000000
@@ -1997,6 +2014,7 @@ sun/util/logging/PlatformLogger$DefaultLoggerProxy 00000000000000000001100000000
 net/averkhoglyad/chess/manager/gui/event/ApplicationEventDispatcher.on(Ljava/lang/Enum;Ljava/lang/Runnable;)Ljava/util/UUID; 00000000000000000000000101111100
 com/sun/org/apache/xerces/internal/impl/dv/dtd/ENTITYDatatypeValidator 00000000000000000000110000000000
 com/sun/javafx/scene/input/InputEventUtils 00000000000000000001000000000000
+net/averkhoglyad/chess/manager/gui/service/ProfileServiceImpl$$Lambda$7.<init>()V 00000000000000000000000101111100
 com/fasterxml/jackson/databind/ser/std/ClassSerializer 00000000000000000000100000000000
 javafx/beans/binding/Bindings.bindContent(Ljava/util/List;Ljavafx/collections/ObservableList;)V 00000000000000000000000101111100
 javafx/scene/control/TableColumn.setMaxWidth(D)V 00000000000000000000000101111100
@@ -2053,6 +2071,7 @@ java/nio/file/LinkOption 00000000000000000001100000000000
 java/lang/Number 00000000000000000000100000000000
 java/util/Set.addAll(Ljava/util/Collection;)Z 00000000000000000000000101111100
 sun/text/resources/en/FormatData_en.<init>()V 00000000000000000000000101111100
+net/averkhoglyad/chess/manager/gui/service/ProfileServiceImpl 00000000000000000000110000000000
 javax/crypto/spec/RC2ParameterSpec 00000000000000000000110000000000
 org/slf4j/impl/StaticLoggerBinder.getSingleton()Lorg/slf4j/impl/StaticLoggerBinder; 00000000000000000000000101111100
 com/sun/org/apache/xerces/internal/utils/XMLSecurityPropertyManager$Property.defaultValue()Ljava/lang/String; 00000000000000000000000101111100
@@ -2371,6 +2390,7 @@ sun/reflect/UnsafeFieldAccessorImpl 00000000000000000001000000000000
 net/averkhoglyad/chess/manager/gui/component/GamePreview 00000000000000000000110000000000
 com/fasterxml/jackson/datatype/jsr310/deser/key/PeriodKeyDeserializer 00000000000000000001100000000000
 com/fasterxml/jackson/databind/deser/BeanDeserializer.<init>(Lcom/fasterxml/jackson/databind/deser/BeanDeserializerBuilder;Lcom/fasterxml/jackson/databind/BeanDescription;Lcom/fasterxml/jackson/databind/deser/impl/BeanPropertyMap;Ljava/util/Map;Ljava/util/HashSet;ZZ)V 00000000000000000000000101111100
+net/averkhoglyad/chess/manager/gui/component/TopMenu$$Lambda$56.<init>()V 00000000000000000000000101111100
 java/util/concurrent/ConcurrentHashMap.<init>(IFI)V 00000000000000000000000101111100
 org/apache/http/NoHttpResponseException 00000000000000000000100000000000
 ch/qos/logback/core/subst/Tokenizer$TokenizerState.values()[Lch/qos/logback/core/subst/Tokenizer$TokenizerState; 00000000000000000000000101111100
@@ -2450,6 +2470,7 @@ ch/qos/logback/core/joran/util/beans/BeanDescriptionFactory.<init>(Lch/qos/logba
 com/excelsior/jet/runtime/b4 00000000000000000001000000000000
 com/excelsior/jet/runtime/b6 00000000000000000001000000000000
 com/fasterxml/jackson/databind/introspect/TypeResolutionContext$Basic 00000000000000000000110000000000
+net/averkhoglyad/chess/manager/gui/component/ChessDiagram$$Lambda$73.<init>()V 00000000000000000000000101111100
 com/excelsior/jet/runtime/b7 00000000000000000001000000000000
 org/apache/http/HttpRequest.getRequestLine()Lorg/apache/http/RequestLine; 00000000000000000000000101111100
 org/apache/http/impl/conn/CPoolProxy.detach(Lorg/apache/http/HttpClientConnection;)Lorg/apache/http/impl/conn/CPoolEntry; 00000000000000000000000101111100
@@ -2534,6 +2555,7 @@ java/util/Collections.unmodifiableList(Ljava/util/List;)Ljava/util/List; 0000000
 net/averkhoglyad/chess/manager/gui/component/TopMenu$$Lambda$55 00000000000000000000010000000000
 java/nio/Buffer.hasRemaining()Z 00000000000000000000000101111100
 org/apache/http/config/RegistryBuilder.register(Ljava/lang/String;Ljava/lang/Object;)Lorg/apache/http/config/RegistryBuilder; 00000000000000000000000101111100
+net/averkhoglyad/chess/manager/gui/component/TopMenu$$Lambda$56 00000000000000000000010000000000
 com/sun/glass/ui/Window.notifyMoveToAnotherScreen(Lcom/sun/glass/ui/Screen;)V 00000000000000000000000001100010
 net/averkhoglyad/chess/manager/core/helper/ExceptionHelper.doStrict(Lnet/averkhoglyad/chess/manager/core/helper/ExceptionHelper$ThrowsRunnable;)V 00000000000000000000000101111100
 com/excelsior/jet/runtime/h0 00000000000000000001000000000000
@@ -2666,6 +2688,7 @@ com/fasterxml/jackson/databind/deser/NullValueProvider 0000000000000000000010000
 org/apache/http/impl/cookie/RFC2109DomainHandler.<init>()V 00000000000000000000000101111100
 com/fasterxml/jackson/databind/JavaType.getRawClass()Ljava/lang/Class; 00000000000000000000000101111100
 com/sun/javafx/scene/control/skin/BehaviorSkinBase 00000000000000000001000000000000
+javafx/scene/control/ScrollPane.getId()Ljava/lang/String; 00000000000000000000000101111100
 org/apache/http/protocol/HttpRequestExecutor 00000000000000000000110000000000
 java/lang/String.equalsIgnoreCase(Ljava/lang/String;)Z 00000000000000000000000101111100
 com/excelsior/jet/runtime/o1 00000000000000000001000000000000
@@ -2710,6 +2733,7 @@ com/fasterxml/jackson/datatype/jsr310/ser/OffsetDateTimeSerializer$$Lambda$23 00
 com/fasterxml/jackson/datatype/jsr310/ser/OffsetDateTimeSerializer$$Lambda$24 00000000000000000000010000000000
 com/fasterxml/jackson/datatype/jsr310/ser/OffsetDateTimeSerializer$$Lambda$25 00000000000000000000010000000000
 com/fasterxml/jackson/datatype/jsr310/ser/OffsetDateTimeSerializer$$Lambda$26 00000000000000000000010000000000
+com/fasterxml/jackson/datatype/jsr310/ser/OffsetDateTimeSerializer$$Lambda$27 00000000000000000000010000000000
 com/fasterxml/jackson/datatype/jsr310/ser/OffsetDateTimeSerializer$$Lambda$28 00000000000000000000010000000000
 com/fasterxml/jackson/datatype/jsr310/ser/OffsetDateTimeSerializer$$Lambda$29 00000000000000000000010000000000
 javafx/scene/layout/BorderPane.setTop(Ljavafx/scene/Node;)V 00000000000000000000000101111100
@@ -2819,6 +2843,7 @@ com/excelsior/jet/runtime/q32 00000000000000000001000000000000
 com/excelsior/jet/runtime/q33 00000000000000000001000000000000
 com/excelsior/jet/runtime/w4 00000000000000000001000000000000
 com/excelsior/jet/runtime/w5 00000000000000000001000000000000
+net/averkhoglyad/chess/manager/Main.lambda$null$3(Ljava/lang/String;Lnet/averkhoglyad/chess/manager/core/sdk/data/User;)Z 00000000000000000000000101111100
 javafx/util/Pair.getValue()Ljava/lang/Object; 00000000000000000000000101111100
 java/util/Optional.map(Ljava/util/function/Function;)Ljava/util/Optional; 00000000000000000000000101111100
 com/excelsior/jet/runtime/w8 00000000000000000001000000000000
@@ -2870,6 +2895,7 @@ javafx/scene/control/Control$StyleableProperties 0000000000000000000100000000000
 jdk/internal/org/objectweb/asm/Type 00000000000000000001000000000000
 net/averkhoglyad/chess/manager/core/sdk/http/WebClientImpl.lambda$buildUrl$6(Lorg/apache/http/client/utils/URIBuilder;Lorg/apache/http/message/BasicNameValuePair;)V 00000000000000000000000101111100
 net/averkhoglyad/chess/manager/core/sdk/http/JsonBasedWebClientImpl.lambda$buildUrl$4()Lorg/apache/http/client/utils/URIBuilder; 00000000000000000000000101111100
+net/averkhoglyad/chess/manager/gui/service/ProfileServiceImpl$$Lambda$81.<init>()V 00000000000000000000000101111100
 java/util/ResourceBundle 00000000000000000001100000000000
 com/excelsior/jet/runtime/q60 00000000000000000001000000000000
 java/lang/reflect/WildcardType.getUpperBounds()[Ljava/lang/reflect/Type; 00000000000000000000000101111100
@@ -2944,6 +2970,7 @@ java/lang/annotation/Target 00000000000000000000100000000000
 com/fasterxml/jackson/core/JsonToken.isStructEnd()Z 00000000000000000000000101111100
 com/sun/javafx/font/FallbackResource 00000000000000000001000000000000
 ch/qos/logback/classic/pattern/LineOfCallerConverter 00000000000000000000100000000000
+org/controlsfx/control/StatusBar.setText(Ljava/lang/String;)V 00000000000000000000000101111100
 net/averkhoglyad/chess/manager/gui/component/TopMenu.toNextPage(Ljavafx/event/ActionEvent;)V 00000000000000000000000101111100
 com/fasterxml/jackson/core/util/BufferRecycler.allocCharBuffer(II)[C 00000000000000000000000101111100
 java/util/Iterator.remove()V 00000000000000000000000101111100
@@ -3093,6 +3120,7 @@ com/sun/javafx/font/directwrite/OS 00000000000000000001000000000000
 net/averkhoglyad/chess/manager/gui/controller/GamesController$$Lambda$41 00000000000000000000010000000000
 sun/security/provider/certpath/ForwardState.<init>()V 00000000000000000000000101111100
 net/averkhoglyad/chess/manager/gui/controller/GamesController$$Lambda$42 00000000000000000000010000000000
+net/averkhoglyad/chess/manager/Main.lambda$bindViewEvents$8()V 00000000000000000000000101111100
 com/sun/crypto/provider/GCTR.<init>(Lcom/sun/crypto/provider/SymmetricCipher;[B)V 00000000000000000000000101111100
 net/averkhoglyad/chess/manager/gui/controller/GamesController$$Lambda$43 00000000000000000000010000000000
 net/averkhoglyad/chess/manager/gui/controller/GamesController$$Lambda$44 00000000000000000000010000000000
@@ -3230,6 +3258,7 @@ com/fasterxml/jackson/core/io/IOContext 00000000000000000000110000000000
 com/fasterxml/jackson/databind/introspect/BeanPropertyDefinition.getFullName()Lcom/fasterxml/jackson/databind/PropertyName; 00000000000000000000000101111100
 com/sun/org/apache/xerces/internal/xni/parser/XMLDocumentSource 00000000000000000000100000000000
 ch/qos/logback/core/pattern/Converter.convert(Ljava/lang/Object;)Ljava/lang/String; 00000000000000000000000101111100
+net/averkhoglyad/chess/manager/gui/component/LichessUsersManager.getChildren()Ljavafx/collections/ObservableList; 00000000000000000000000101111100
 ch/qos/logback/core/joran/action/IADataForComplexProperty.<init>(Lch/qos/logback/core/joran/util/PropertySetter;Lch/qos/logback/core/util/AggregationType;Ljava/lang/String;)V 00000000000000000000000101111100
 java/lang/Package 00000000000000000001100000000000
 com/fasterxml/jackson/databind/deser/std/EnumMapDeserializer 00000000000000000000100000000000
@@ -3252,7 +3281,7 @@ com/fasterxml/jackson/datatype/jsr310/ser/LocalTimeSerializer 000000000000000000
 com/excelsior/jet/runtime/r32 00000000000000000001000000000000
 java/nio/file/StandardOpenOption.values()[Ljava/nio/file/StandardOpenOption; 00000000000000000000000101111100
 com/excelsior/jet/runtime/r35 00000000000000000001000000000000
-javafx/stage/WindowEvent 00000000000000000001000000000000
+javafx/stage/WindowEvent 00000000000000000001100000000000
 org/apache/http/impl/cookie/IgnoreSpecProvider.<init>()V 00000000000000000000000101111100
 org/apache/http/impl/auth/KerberosSchemeFactory 00000000000000000000110000000000
 ch/qos/logback/classic/spi/ILoggingEvent.getThreadName()Ljava/lang/String; 00000000000000000000000101111100
@@ -3512,6 +3541,7 @@ com/fasterxml/jackson/databind/DeserializationContext.checkUnresolvedObjectId()V
 ch/qos/logback/core/joran/spi/NoAutoStartUtil 00000000000000000000100000000000
 net/averkhoglyad/chess/manager/gui/controller/RootController.lambda$null$16(Ljava/lang/Void;Ljava/lang/Throwable;)V 00000000000000000000000101111100
 org/apache/http/impl/auth/HttpAuthenticator.<init>()V 00000000000000000000000101111100
+net/averkhoglyad/chess/manager/gui/component/LichessUsersManager.reset()V 00000000000000000000000101111100
 ch/qos/logback/core/pattern/IdentityCompositeConverter 00000000000000000000100000000000
 com/fasterxml/jackson/datatype/jsr310/ser/JSR310FormattedSerializerBase 00000000000000000000100000000000
 org/apache/http/client/protocol/HttpClientContext.getAuthCache()Lorg/apache/http/client/AuthCache; 00000000000000000000000101111100
@@ -3584,6 +3614,7 @@ java/time/Year 00000000000000000000100000000000
 javafx/scene/input/GestureEvent 00000000000000000001000000000000
 org/apache/http/config/ConnectionConfig$Builder.build()Lorg/apache/http/config/ConnectionConfig; 00000000000000000000000101111100
 ch/qos/logback/core/net/ssl/KeyManagerFactoryFactoryBean 00000000000000000000100000000000
+com/fasterxml/jackson/datatype/jsr310/ser/ZonedDateTimeSerializer$$Lambda$30.<init>()V 00000000000000000000000101111100
 sun/security/provider/certpath/PolicyChecker.getPolicyTree()Ljava/security/cert/PolicyNode; 00000000000000000000000101111100
 sun/security/x509/X500Name 00000000000000000001100000000000
 javafx/beans/property/SimpleDoubleProperty 00000000000000000001110000000000
@@ -3614,6 +3645,7 @@ com/fasterxml/jackson/databind/introspect/POJOPropertyBuilder$6.<init>(Lcom/fast
 com/fasterxml/jackson/databind/deser/ValueInstantiator 00000000000000000000100000000000
 java/lang/Short 00000000000000000000100000000000
 java/lang/reflect/Method.getDeclaredAnnotations()[Ljava/lang/annotation/Annotation; 00000000000000000000000101111100
+net/averkhoglyad/chess/manager/gui/service/ProfileServiceImpl$$Lambda$6.<init>()V 00000000000000000000000101111100
 com/fasterxml/jackson/databind/cfg/SerializerFactoryConfig 00000000000000000001110000000000
 net/averkhoglyad/chess/manager/core/sdk/data/Game.setRated(Z)V 00000000000000000000000101111100
 java/util/Hashtable.clear()V 00000000000000000000000101111100
@@ -3710,6 +3742,7 @@ org/apache/http/client/HttpRequestRetryHandler.retryRequest(Ljava/io/IOException
 com/fasterxml/jackson/databind/type/TypeBindings.size()I 00000000000000000000000101111100
 javafx/scene/layout/BorderWidths 00000000000000000001000000000000
 java/time/temporal/TemporalAccessor 00000000000000000000100000000000
+net/averkhoglyad/chess/manager/gui/component/LichessUsersManager.<init>()V 00000000000000000000000101111100
 sun/security/util/Debug 00000000000000000000100000000000
 net/averkhoglyad/chess/manager/gui/controller/AddUserPopupController 00000000000000000000110000000000
 java/lang/invoke/InvokerBytecodeGenerator$2 00000000000000000001000000000000
@@ -3762,6 +3795,8 @@ sun/security/rsa/RSASignature$SHA256withRSA.<init>()V 00000000000000000000000101
 net/averkhoglyad/chess/manager/gui/controller/RootController.lambda$null$5()V 00000000000000000000000101111100
 ch/qos/logback/core/util/StatusPrinter.printInCaseOfErrorsOrWarnings(Lch/qos/logback/core/Context;)V 00000000000000000000000101111100
 com/sun/javafx/font/directwrite/DWRITE_GLYPH_RUN.glyphAdvances@F 00000000000000001110000000010010
+net/averkhoglyad/chess/manager/gui/service/ProfileServiceImpl$$Lambda$6 00000000000000000000010000000000
+net/averkhoglyad/chess/manager/gui/service/ProfileServiceImpl$$Lambda$7 00000000000000000000010000000000
 com/fasterxml/jackson/databind/type/ArrayType 00000000000000000000100000000000
 com/sun/javafx/css/StyleManager.addUserAgentStylesheet(Ljava/lang/String;)V 00000000000000000000000101111100
 org/apache/http/Header.getName()Ljava/lang/String; 00000000000000000000000101111100
@@ -3927,6 +3962,7 @@ javafx/scene/control/Label.setWrapText(Z)V 00000000000000000000000101111100
 java/util/concurrent/CompletableFuture.runAsync(Ljava/lang/Runnable;)Ljava/util/concurrent/CompletableFuture; 00000000000000000000000101111100
 java/net/Socket.connect(Ljava/net/SocketAddress;I)V 00000000000000000000000101111100
 net/averkhoglyad/chess/manager/core/sdk/data/Opening 00000000000000000000100000000000
+net/averkhoglyad/chess/manager/gui/component/LichessUsersManager.setLichessUsers(Ljava/util/List;)V 00000000000000000000000101111100
 com/fasterxml/jackson/core/io/NumberInput.parseLong([CII)J 00000000000000000000000101111100
 net/averkhoglyad/chess/manager/core/sdk/http/Operation.getRequestClass()Ljava/lang/Class; 00000000000000000000000101111100
 java/lang/String.replace(CC)Ljava/lang/String; 00000000000000000000000101111100
@@ -4002,10 +4038,12 @@ org/controlsfx/control/StatusBar.getRightItems()Ljavafx/collections/ObservableLi
 com/sun/org/apache/xerces/internal/impl/dtd/XMLDTDProcessor 00000000000000000001110000000000
 .nativelibrary sunmscapi
 com/fasterxml/jackson/databind/AnnotationIntrospector.findWrapperName(Lcom/fasterxml/jackson/databind/introspect/Annotated;)Lcom/fasterxml/jackson/databind/PropertyName; 00000000000000000000000101111100
+javafx/stage/Window.setOnShowing(Ljavafx/event/EventHandler;)V 00000000000000000000000101111100
 com/fasterxml/jackson/databind/DeserializationContext.getConfig()Lcom/fasterxml/jackson/databind/DeserializationConfig; 00000000000000000000000101111100
 javafx/scene/layout/Region.heightProperty()Ljavafx/beans/property/ReadOnlyDoubleProperty; 00000000000000000000000101111100
 java/lang/invoke/BoundMethodHandle$SpeciesData.constructor()Ljava/lang/invoke/MethodHandle; 00000000000000000000000101111100
 org/apache/http/io/SessionInputBuffer 00000000000000000000100000000000
+net/averkhoglyad/chess/manager/Main$$Lambda$50.<init>()V 00000000000000000000000101111100
 com/sun/org/apache/xerces/internal/xni/parser/XMLComponent.getRecognizedProperties()[Ljava/lang/String; 00000000000000000000000101111100
 net/averkhoglyad/chess/manager/core/service/LichessIntegrationService.getUserGames(Ljava/lang/String;Lnet/averkhoglyad/chess/manager/core/data/Paging;)Ljava/util/concurrent/CompletableFuture; 00000000000000000000000101111100
 java/nio/DirectByteBuffer.order(Ljava/nio/ByteOrder;)Ljava/nio/ByteBuffer; 00000000000000000000000101111100
@@ -4215,6 +4253,7 @@ java/text/DigitList 00000000000000000001000000000000
 com/sun/org/apache/xerces/internal/impl/PropertyManager 00000000000000000000110000000000
 ch/qos/logback/classic/pattern/MessageConverter 00000000000000000000110000000000
 ch/qos/logback/core/util/OptionHelper.getEnv(Ljava/lang/String;)Ljava/lang/String; 00000000000000000000000101111100
+net/averkhoglyad/chess/manager/gui/service/ProfileService 00000000000000000000100000000000
 com/fasterxml/jackson/databind/introspect/VisibilityChecker.isGetterVisible(Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethod;)Z 00000000000000000000000101111100
 org/jcp/xml/dsig/internal/dom/XMLDSigRI$1.<init>(Lorg/jcp/xml/dsig/internal/dom/XMLDSigRI;Ljava/util/Map;)V 00000000000000000000000101111100
 net/averkhoglyad/chess/manager/gui/event/FileEvent 00000000000000000001100000000000
@@ -4385,6 +4424,7 @@ java/net/SocketException 00000000000000000000100000000000
 org/apache/http/config/MessageConstraints.getMaxLineLength()I 00000000000000000000000101111100
 com/fasterxml/jackson/databind/exc/InvalidTypeIdException 00000000000000000000100000000000
 sun/reflect/misc/Trampoline.invoke(Ljava/lang/reflect/Method;Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object; 00000000000000000000000101111100
+java/nio/file/Path.resolve(Ljava/lang/String;)Ljava/nio/file/Path; 00000000000000000000000101111100
 java/util/concurrent/Future.isCancelled()Z 00000000000000000000000101111100
 java/util/ArrayDeque 00000000000000000001000000000000
 net/averkhoglyad/chess/manager/gui/controller/AddUserPopupController.<init>()V 00000000000000000000000101111100
@@ -4519,6 +4559,7 @@ javafx/beans/binding/NumberExpressionBase.isEqualTo(I)Ljavafx/beans/binding/Bool
 com/excelsior/jet/runtime/d35 00000000000000000001000000000000
 sun/nio/fs/WindowsNativeDispatcher$VolumeInformation.fileSystemName@Ljava/lang/String; 00000000000000001110000000010010
 org/apache/http/conn/routing/RouteTracker.toRoute()Lorg/apache/http/conn/routing/HttpRoute; 00000000000000000000000101111100
+net/averkhoglyad/chess/manager/gui/service/ProfileServiceImpl$$Lambda$81 00000000000000000000010000000000
 com/excelsior/jet/runtime/u51 00000000000000000001000000000000
 net/averkhoglyad/chess/manager/gui/controller/RootController.lambda$null$0()Ljava/nio/file/Path; 00000000000000000000000101111100
 com/excelsior/jet/runtime/u53 00000000000000000001000000000000
@@ -4853,6 +4894,7 @@ ch/qos/logback/core/rolling/TimeBasedFileNamingAndTriggeringPolicyBase 000000000
 org/apache/http/HeaderIterator 00000000000000000000100000000000
 java/lang/Long 00000000000000000000100000000000
 java/util/BitSet 00000000000000000000110000000000
+com/fasterxml/jackson/datatype/jsr310/ser/InstantSerializer$$Lambda$24.<init>()V 00000000000000000000000101111100
 java/lang/ref/ReferenceQueue 00000000000000000000110000000000
 sun/security/jgss/SunProvider 00000000000000000001110000000000
 com/sun/org/apache/xerces/internal/parsers/SAXParser 00000000000000000001000000000000
@@ -5276,6 +5318,7 @@ net/averkhoglyad/chess/manager/gui/component/GamesTable$$Lambda$61 0000000000000
 net/averkhoglyad/chess/manager/gui/component/GamesTable$$Lambda$62 00000000000000000000010000000000
 sun/nio/cs/UTF_8$Decoder 00000000000000000001000000000000
 net/averkhoglyad/chess/manager/gui/component/GamesTable$$Lambda$63 00000000000000000000010000000000
+net/averkhoglyad/chess/manager/gui/component/GamesTable$$Lambda$64 00000000000000000000010000000000
 java/lang/String.<init>([C)V 00000000000000000000000101111100
 net/averkhoglyad/chess/manager/gui/component/GamesTable$$Lambda$66 00000000000000000000010000000000
 net/averkhoglyad/chess/manager/gui/component/GamesTable$$Lambda$67 00000000000000000000010000000000
@@ -5287,8 +5330,10 @@ sun/nio/cs/UTF_8.<init>()V 00000000000000000000000101111100
 com/fasterxml/jackson/databind/cfg/MapperConfigBase.getConfigOverride(Ljava/lang/Class;)Lcom/fasterxml/jackson/databind/cfg/ConfigOverride; 00000000000000000000000101111100
 java/net/SocketInputStream 00000000000000000001000000000000
 net/averkhoglyad/chess/manager/gui/controller/GamesController.lambda$null$16(Ljava/nio/file/Path;Ljava/util/concurrent/atomic/AtomicInteger;ILjava/lang/String;)V 00000000000000000000000101111100
+net/averkhoglyad/chess/manager/gui/component/LichessUsersManager 00000000000000000001110000000000
 net/averkhoglyad/chess/manager/gui/controller/AddUserPopupController$$Lambda$131.<init>()V 00000000000000000000000101111100
 net/averkhoglyad/chess/manager/gui/component/GamesTable$$Lambda$70 00000000000000000000010000000000
+net/averkhoglyad/chess/manager/gui/component/GamesTable$$Lambda$71 00000000000000000000010000000000
 com/fasterxml/jackson/databind/deser/ValueInstantiators.findValueInstantiator(Lcom/fasterxml/jackson/databind/DeserializationConfig;Lcom/fasterxml/jackson/databind/BeanDescription;Lcom/fasterxml/jackson/databind/deser/ValueInstantiator;)Lcom/fasterxml/jackson/databind/deser/ValueInstantiator; 00000000000000000000000101111100
 ch/qos/logback/core/pattern/parser/TokenStream$TokenizerState.values()[Lch/qos/logback/core/pattern/parser/TokenStream$TokenizerState; 00000000000000000000000101111100
 com/fasterxml/jackson/databind/deser/AbstractDeserializer 00000000000000000000100000000000
@@ -5540,6 +5585,7 @@ com/fasterxml/jackson/datatype/jsr310/ser/InstantSerializer$$Lambda$21 000000000
 com/fasterxml/jackson/datatype/jsr310/ser/InstantSerializer$$Lambda$22 00000000000000000000010000000000
 javafx/scene/layout/Region.setMaxSize(DD)V 00000000000000000000000101111100
 com/fasterxml/jackson/datatype/jsr310/ser/InstantSerializer$$Lambda$23 00000000000000000000010000000000
+com/fasterxml/jackson/datatype/jsr310/ser/InstantSerializer$$Lambda$24 00000000000000000000010000000000
 java/util/Stack.push(Ljava/lang/Object;)Ljava/lang/Object; 00000000000000000000000101111100
 com/fasterxml/jackson/datatype/jsr310/ser/InstantSerializer$$Lambda$25 00000000000000000000010000000000
 org/slf4j/helpers/Util 00000000000000000001100000000000
@@ -5659,6 +5705,7 @@ java/util/ListIterator 00000000000000000000100000000000
 com/fasterxml/jackson/core/Base64Variant.<init>(Lcom/fasterxml/jackson/core/Base64Variant;Ljava/lang/String;ZCI)V 00000000000000000000000101111100
 com/sun/org/apache/xerces/internal/util/AugmentationsImpl$SmallContainer.<init>(Lcom/sun/org/apache/xerces/internal/util/AugmentationsImpl;)V 00000000000000000000000101111100
 java/nio/file/Path 00000000000000000000100000000000
+net/averkhoglyad/chess/manager/gui/component/LichessUsersManager.setOnDropUser(Ljavafx/event/EventHandler;)V 00000000000000000000000101111100
 ch/qos/logback/core/spi/DeferredProcessingAware.prepareForDeferredProcessing()V 00000000000000000000000101111100
 com/fasterxml/jackson/databind/SerializationConfig 00000000000000000001110000000000
 com/fasterxml/jackson/databind/deser/DeserializerFactory.createCollectionDeserializer(Lcom/fasterxml/jackson/databind/DeserializationContext;Lcom/fasterxml/jackson/databind/type/CollectionType;Lcom/fasterxml/jackson/databind/BeanDescription;)Lcom/fasterxml/jackson/databind/JsonDeserializer; 00000000000000000000000101111100
@@ -5668,6 +5715,7 @@ javafx/scene/control/Alert$AlertType 00000000000000000001100000000000
 javafx/stage/PopupWindow$AnchorLocation 00000000000000000001000000000000
 javafx/scene/control/SelectionMode 00000000000000000001000000000000
 java/io/PrintStream.println()V 00000000000000000000000101111100
+net/averkhoglyad/chess/manager/gui/data/ApplicationModel.setUsers(Ljavafx/collections/ObservableList;)V 00000000000000000000000101111100
 sun/security/pkcs/PKCS8Key 00000000000000000001000000000000
 org/apache/http/conn/routing/RouteTracker 00000000000000000000110000000000
 javafx/fxml/FXMLLoader$SupportedType 00000000000000000001000000000000
@@ -6107,8 +6155,8 @@ java/lang/Void 00000000000000000001100000000000
 com/fasterxml/jackson/databind/introspect/AnnotationCollector$NCollector 00000000000000000000100000000000
 java/io/ByteArrayOutputStream.size()I 00000000000000000000000101111100
 net/averkhoglyad/chess/manager/gui/controller/GamesController.lambda$null$40()V 00000000000000000000000101111100
-net/averkhoglyad/chess/manager/gui/component/GamesTable$$Lambda$93.<init>()V 00000000000000000000000101111100
 net/averkhoglyad/chess/manager/gui/component/ChessDiagram.lambda$new$0(Ljavafx/beans/value/ObservableValue;Ljava/lang/String;Ljava/lang/String;)V 00000000000000000000000101111100
+net/averkhoglyad/chess/manager/gui/component/GamesTable$$Lambda$93.<init>()V 00000000000000000000000101111100
 javafx/scene/text/TextBoundsType.values()[Ljavafx/scene/text/TextBoundsType; 00000000000000000000000101111100
 ch/qos/logback/core/rolling/helper/FileFilterUtil 00000000000000000000100000000000
 ch/qos/logback/classic/pattern/CallerDataConverter 00000000000000000000100000000000
@@ -6124,13 +6172,13 @@ com/sun/org/apache/xerces/internal/xni/parser/XMLParserConfiguration.setDTDHandl
 org/apache/http/util/Asserts.notNull(Ljava/lang/Object;Ljava/lang/String;)V 00000000000000000000000101111100
 org/apache/http/impl/cookie/RFC2965Spec 00000000000000000000110000000000
 java/util/Collections.emptyList()Ljava/util/List; 00000000000000000000000101111100
-org/apache/http/util/TextUtils 00000000000000000000100000000000
 org/apache/http/impl/conn/PoolingHttpClientConnectionManager$1 00000000000000000000110000000000
+org/apache/http/util/TextUtils 00000000000000000000100000000000
 com/sun/glass/ui/Clipboard.contentChanged()V 00000000000000000000000001100010
 java/nio/charset/Charset.forName(Ljava/lang/String;)Ljava/nio/charset/Charset; 00000000000000000000000101111100
-com/fasterxml/jackson/databind/deser/CreatorProperty 00000000000000000000100000000000
-org/xml/sax/InputSource.getPublicId()Ljava/lang/String; 00000000000000000000000101111100
 com/fasterxml/jackson/databind/deser/std/NumberDeserializers.find(Ljava/lang/Class;Ljava/lang/String;)Lcom/fasterxml/jackson/databind/JsonDeserializer; 00000000000000000000000101111100
+org/xml/sax/InputSource.getPublicId()Ljava/lang/String; 00000000000000000000000101111100
+com/fasterxml/jackson/databind/deser/CreatorProperty 00000000000000000000100000000000
 net/averkhoglyad/chess/manager/gui/component/TopMenu.<init>()V 00000000000000000000000101111100
 sun/security/x509/GeneralNames 00000000000000000000100000000000
 com/sun/org/apache/xerces/internal/xni/XMLAttributes 00000000000000000000100000000000
@@ -6141,8 +6189,9 @@ com/fasterxml/jackson/databind/type/ClassStack 00000000000000000000110000000000
 java/util/stream/Nodes$IntSpinedNodeBuilder 00000000000000000001000000000000
 com/fasterxml/jackson/databind/cfg/ConfigFeature 00000000000000000000100000000000
 javafx/scene/control/SplitPane 00000000000000000001110000000000
-net/averkhoglyad/chess/manager/Main$$Lambda$1 00000000000000000000010000000000
 java/lang/Class.isArray()Z 00000000000000000000000101111100
+net/averkhoglyad/chess/manager/Main$$Lambda$1 00000000000000000000010000000000
+net/averkhoglyad/chess/manager/Main$$Lambda$3 00000000000000000000010000000000
 net/averkhoglyad/chess/manager/gui/controller/RootController.lambda$null$17(Lnet/averkhoglyad/chess/manager/core/sdk/data/PageResult;)V 00000000000000000000000101111100
 ch/qos/logback/core/pattern/DynamicConverter.setOptionList(Ljava/util/List;)V 00000000000000000000000101111100
 java/nio/file/Files$AcceptAllFilter 00000000000000000001000000000000
@@ -6370,6 +6419,7 @@ com/sun/org/apache/xerces/internal/utils/XMLSecurityPropertyManager$Property 000
 com/fasterxml/jackson/core/JsonToken 00000000000000000001100000000000
 com/sun/scenario/effect/impl/prism/PrRenderer 00000000000000000001000000000000
 ch/qos/logback/core/spi/ContextAwareBase.setContext(Lch/qos/logback/core/Context;)V 00000000000000000000000101111100
+net/averkhoglyad/chess/manager/gui/component/GamesTable$$Lambda$64.<init>()V 00000000000000000000000101111100
 com/fasterxml/jackson/databind/JavaType.withHandlersFrom(Lcom/fasterxml/jackson/databind/JavaType;)Lcom/fasterxml/jackson/databind/JavaType; 00000000000000000000000101111100
 javafx/beans/property/SimpleObjectProperty 00000000000000000001110000000000
 sun/security/provider/DSAParameters.<init>()V 00000000000000000000000101111100
@@ -6501,6 +6551,7 @@ com/sun/org/apache/xerces/internal/utils/XMLLimitAnalyzer.getTotalValue(I)I 0000
 com/fasterxml/jackson/databind/introspect/AnnotatedMethodCollector.collectMethods(Lcom/fasterxml/jackson/databind/AnnotationIntrospector;Lcom/fasterxml/jackson/databind/introspect/TypeResolutionContext;Lcom/fasterxml/jackson/databind/introspect/ClassIntrospector$MixInResolver;Lcom/fasterxml/jackson/databind/type/TypeFactory;Lcom/fasterxml/jackson/databind/JavaType;Ljava/util/List;Ljava/lang/Class;)Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodMap; 00000000000000000000000101111100
 com/sun/javafx/scene/control/skin/ToolBarSkin$StyleableProperties 00000000000000000001000000000000
 java/util/Map.get(Ljava/lang/Object;)Ljava/lang/Object; 00000000000000000000000101111100
+net/averkhoglyad/chess/manager/gui/service/ProfileService.load()Ljava/util/List; 00000000000000000000000101111100
 org/apache/http/util/LangUtils 00000000000000000000100000000000
 javafx/scene/control/ListView.<init>()V 00000000000000000000000101111100
 com/fasterxml/jackson/databind/introspect/BeanPropertyDefinition.getNonConstructorMutator()Lcom/fasterxml/jackson/databind/introspect/AnnotatedMember; 00000000000000000000000101111100
@@ -6519,6 +6570,7 @@ java/nio/CharBuffer 00000000000000000000100000000000
 net/averkhoglyad/chess/manager/gui/data/GameVO.getGame()Lnet/averkhoglyad/chess/manager/core/sdk/data/Game; 00000000000000000000000101111100
 net/averkhoglyad/chess/manager/core/helper/MapBuilder.of(Ljava/lang/Object;Ljava/lang/Object;)Lnet/averkhoglyad/chess/manager/core/helper/MapBuilder$Pair; 00000000000000000000000101111100
 net/averkhoglyad/chess/manager/gui/controller/RootController$$Lambda$102.<init>()V 00000000000000000000000101111100
+net/averkhoglyad/chess/manager/Main$$Lambda$3.<init>()V 00000000000000000000000101111100
 org/controlsfx/glyphfont/FontAwesome$Glyph 00000000000000000001100000000000
 javafx/scene/layout/VBox.<init>()V 00000000000000000000000101111100
 net/averkhoglyad/chess/manager/gui/controller/RootController.lambda$null$7(Ljava/nio/file/Path;)Ljava/lang/Boolean; 00000000000000000000000101111100
@@ -6775,6 +6827,7 @@ ch/qos/logback/core/status/Status 00000000000000000000100000000000
 com/sun/crypto/provider/TlsMasterSecretGenerator 00000000000000000000010000000000
 ch/qos/logback/classic/LoggerContext.getTurboFilterChainDecision_0_3OrMore(Lorg/slf4j/Marker;Lch/qos/logback/classic/Logger;Lch/qos/logback/classic/Level;Ljava/lang/String;[Ljava/lang/Object;Ljava/lang/Throwable;)Lch/qos/logback/core/spi/FilterReply; 00000000000000000000000101111100
 com/fasterxml/jackson/databind/util/EnumResolver.getDefaultValue()Ljava/lang/Enum; 00000000000000000000000101111100
+com/fasterxml/jackson/datatype/jsr310/ser/ZonedDateTimeSerializer$$Lambda$30 00000000000000000000010000000000
 com/fasterxml/jackson/datatype/jsr310/ser/ZonedDateTimeSerializer$$Lambda$31 00000000000000000000010000000000
 sun/nio/fs/WindowsNativeDispatcher$DiskFreeSpace.freeBytesAvailable@J 00000000000000001110000000010010
 com/fasterxml/jackson/datatype/jsr310/ser/ZonedDateTimeSerializer$$Lambda$32 00000000000000000000010000000000
@@ -7108,6 +7161,7 @@ org/apache/http/impl/io/SessionInputBufferImpl 00000000000000000000110000000000
 com/fasterxml/jackson/databind/util/ClassUtil.getDeclaredFields(Ljava/lang/Class;)[Ljava/lang/reflect/Field; 00000000000000000000000101111100
 java/nio/file/Path.getParent()Ljava/nio/file/Path; 00000000000000000000000101111100
 java/util/concurrent/atomic/AtomicInteger 00000000000000000000110000000000
+net/averkhoglyad/chess/manager/gui/service/ProfileServiceImpl.lambda$save$1(Ljava/util/List;)Ljava/nio/file/Path; 00000000000000000000000101111100
 java/net/PlainSocketImpl$1 00000000000000000001000000000000
 javafx/scene/layout/AnchorPane.setId(Ljava/lang/String;)V 00000000000000000000000101111100
 javafx/scene/control/ScrollBar$StyleableProperties 00000000000000000001000000000000
@@ -7135,6 +7189,7 @@ com/fasterxml/jackson/databind/deser/DeserializerFactory 00000000000000000001100
 ch/qos/logback/core/rolling/helper/RollingCalendar.<init>(Ljava/lang/String;)V 00000000000000000000000101111100
 org/apache/http/impl/conn/CPoolProxy 00000000000000000000100000000000
 com/sun/javafx/binding/Logging$LoggerHolder 00000000000000000001000000000000
+net/averkhoglyad/chess/manager/gui/service/ProfileServiceImpl.<init>(Ljava/nio/file/Path;)V 00000000000000000000000101111100
 javafx/scene/control/Dialog 00000000000000000001000000000000
 com/sun/prism/impl/shape/BasicRoundRectRep 00000000000000000001000000000000
 org/apache/http/client/methods/HttpRequestWrapper.setURI(Ljava/net/URI;)V 00000000000000000000000101111100
@@ -7146,6 +7201,7 @@ ch/qos/logback/core/helpers/CyclicBuffer.asList()Ljava/util/List; 00000000000000
 com/sun/prism/BasicStroke 00000000000000000001000000000000
 com/sun/org/apache/xerces/internal/xni/XMLDocumentHandler.xmlDecl(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lcom/sun/org/apache/xerces/internal/xni/Augmentations;)V 00000000000000000000000101111100
 java/nio/charset/CodingErrorAction 00000000000000000000100000000000
+javafx/scene/control/ScrollPane.setId(Ljava/lang/String;)V 00000000000000000000000101111100
 javafx/beans/property/ReadOnlyStringWrapper.<init>(Ljava/lang/String;)V 00000000000000000000000101111100
 sun/security/internal/spec/TlsPrfParameterSpec.getOutputLength()I 00000000000000000000000101111100
 org/apache/http/HeaderElementIterator.hasNext()Z 00000000000000000000000101111100

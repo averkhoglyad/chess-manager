@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<fx:root type="javafx.scene.layout.Pane" xmlns:fx="http://javafx.com/fxml">
+<fx:root type="net.averkhoglyad.chess.manager.gui.component.ChessDiagram" xmlns:fx="http://javafx.com/fxml">
     <VBox alignment="TOP_CENTER">
         <StackPane fx:id="diagram" alignment="TOP_CENTER">
             <children>
