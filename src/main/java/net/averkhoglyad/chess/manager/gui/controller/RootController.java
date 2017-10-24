@@ -84,6 +84,7 @@ public class RootController {
         profiles = FXCollections.observableList(profileService.load());
         profilesManager.setProfiles(profiles);
         profilesPopup = popupFactory.create("Manage profiles", profilesManager);
+        profilesPopup.setResizable(false);
 
         // Top Menu
         Bindings.bindContent(topMenu.getUsers(), profiles);

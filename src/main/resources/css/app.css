@@ -1,0 +1,23 @@
+
+/*.list-cell:selected {*/
+    /*-fx-background-color: inherit;*/
+    /*-fx-text-fill: inherit;*/
+/*}*/
+
+/*.list-cell:selected .label {*/
+    /*-fx-text-fill: inherit;*/
+/*}*/
+
+.chess-diagram-board {
+    -fx-border-width: 1px;
+    -fx-border-color: black;
+    -fx-border-style: solid;
+}
+
+/*.chess-diagram-board .board-cell.white {*/
+    /*-fx-background-color: antiquewhite;*/
+/*}*/
+
+/*.chess-diagram-board .board-cell.black {*/
+    /*-fx-background-color: burlywood;*/
+/*}*/

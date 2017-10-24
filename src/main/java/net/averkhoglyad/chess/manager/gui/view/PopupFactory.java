@@ -21,7 +21,6 @@ public class PopupFactory {
         stage.setTitle(title);
         stage.initModality(WINDOW_MODAL);
         stage.initOwner(primaryStage);
-        stage.setResizable(false);
         stage.setScene(new Scene(content));
         return stage;
     }

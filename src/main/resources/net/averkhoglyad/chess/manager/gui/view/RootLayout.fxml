@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.BorderPane?>
 <?import net.averkhoglyad.chess.manager.gui.component.GamePreview?>
 <?import net.averkhoglyad.chess.manager.gui.component.GamesTable?>
@@ -7,12 +8,13 @@
 <?import net.averkhoglyad.chess.manager.gui.component.TopMenu?>
 <?import org.controlsfx.control.MasterDetailPane?>
 <?import org.controlsfx.control.StatusBar?>
-<BorderPane xmlns:fx="http://javafx.com/fxml"
+<BorderPane xmlns:fx="http://javafx.com/fxml" stylesheets="@/css/app.css"
             fx:controller="net.averkhoglyad.chess.manager.gui.controller.RootController"
             prefHeight="480" prefWidth="640">
 
     <fx:define>
         <ProfilesManager fx:id="profilesManager"
+                         prefWidth="200"
                          onAddUser="#addProfile"
                          onDropUser="#dropProfile"/>
     </fx:define>
@@ -27,7 +29,7 @@
         </TopMenu>
     </top>
     <center>
-        <MasterDetailPane dividerPosition="0.65" animated="true">
+        <MasterDetailPane dividerPosition="0.65" animated="true" >
             <detailSide>RIGHT</detailSide>
             <masterNode>
                 <GamesTable fx:id="gamesTable" onDisplayGame="#displayGame"

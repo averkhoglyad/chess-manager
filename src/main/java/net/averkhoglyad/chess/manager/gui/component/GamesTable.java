@@ -26,7 +26,10 @@ import org.controlsfx.glyphfont.Glyph;
 
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 
 public class GamesTable extends BaseComponent {
 
@@ -43,9 +46,9 @@ public class GamesTable extends BaseComponent {
     private ObservableList<GameVO> gameVOs = FXCollections.observableArrayList();
 
     // Events
-    private ObjectProperty<EventHandler<DataEvent<Game>>> onDisplayGame = createHandler(DISPLAY_GAME);
-    private ObjectProperty<EventHandler<DataListEvent<Game>>> onSelectGames = createHandler(SELECT_GAMES);
-    private ObjectProperty<EventHandler<DataListEvent<Game>>> onDeselectGames = createHandler(DESELECT_GAMES);
+    private ObjectProperty<EventHandler<DataEvent<Game>>> onDisplayGame = new EventHandlerProperty<>(DISPLAY_GAME);
+    private ObjectProperty<EventHandler<DataListEvent<Game>>> onSelectGames = new EventHandlerProperty<>(SELECT_GAMES);
+    private ObjectProperty<EventHandler<DataListEvent<Game>>> onDeselectGames = new EventHandlerProperty<>(DESELECT_GAMES);
 
     // Nodes
     @FXML

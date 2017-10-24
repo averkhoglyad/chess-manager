@@ -4,12 +4,7 @@
 <?import javafx.scene.layout.*?>
 
 <fx:root type="net.averkhoglyad.chess.manager.gui.component.ChessDiagram" xmlns:fx="http://javafx.com/fxml">
-    <VBox alignment="TOP_CENTER">
-        <StackPane fx:id="diagram" alignment="TOP_CENTER">
-            <children>
-                <GridPane fx:id="board" alignment="CENTER"></GridPane>
-            </children>
-        </StackPane>
-        <Label fx:id="titleLabel" text="${controller.title}" wrapText="true"></Label>
-    </VBox>
+    <StackPane fx:id="diagram" alignment="TOP_CENTER">
+        <GridPane fx:id="board" styleClass="chess-diagram-board" alignment="CENTER"></GridPane>
+    </StackPane>
 </fx:root>

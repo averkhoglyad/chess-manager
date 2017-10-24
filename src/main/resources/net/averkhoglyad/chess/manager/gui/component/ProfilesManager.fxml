@@ -1,35 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.control.ListView?>
+<?import net.averkhoglyad.chess.manager.gui.component.ProfilesManager?>
 
 <fx:root type="net.averkhoglyad.chess.manager.gui.component.ProfilesManager" xmlns:fx="http://javafx.com/fxml">
-    <children>
-        <BorderPane fx:id="pane">
-            <top>
-                <Label text="Lichess profile" alignment="BASELINE_LEFT" textAlignment="LEFT"/>
-            </top>
-            <center>
-                <HBox alignment="BASELINE_CENTER">
-                    <children>
-                        <TextField fx:id="profileTextField"/>
-                        <Pane prefWidth="10"/>
-                        <Button text="Add" onAction="#addLichessUser"/>
-                    </children>
-                </HBox>
-            </center>
-            <bottom>
-                <ListView fx:id="usersListView" prefWidth="125">
-                    <placeholder>
-                        <Label text="No profiles" textAlignment="LEFT"/>
-                    </placeholder>
-                </ListView>
-            </bottom>
-        </BorderPane>
-    </children>
+    <BorderPane>
+        <top>
+            <Label text="Lichess profile" alignment="BASELINE_LEFT" textAlignment="LEFT">
+                <padding>
+                    <Insets top="5" left="10"/>
+                </padding>
+            </Label>
+        </top>
+        <center>
+            <HBox alignment="BASELINE_CENTER">
+                <children>
+                    <TextField fx:id="profileTextField"/>
+                    <Pane prefWidth="10"/>
+                    <Button text="Add" onAction="#addLichessUser"/>
+                </children>
+                <padding>
+                    <Insets topRightBottomLeft="5" />
+                </padding>
+            </HBox>
+        </center>
+        <bottom>
+            <ListView fx:id="usersListView" prefWidth="125">
+                <placeholder>
+                    <Label text="No profiles" textAlignment="LEFT"/>
+                </placeholder>
+            </ListView>
+        </bottom>
+    </BorderPane>
 </fx:root>

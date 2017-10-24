@@ -9,9 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.event.EventType;
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
 import javafx.scene.control.*;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import net.averkhoglyad.chess.manager.core.helper.StringHelper;
@@ -30,12 +28,10 @@ public class ProfilesManager extends BaseComponent {
     private ListProperty<User> profiles = new SimpleListProperty<>(this, "lichessUsers", FXCollections.observableArrayList());
 
     // Event Handlers
-    private ObjectProperty<EventHandler<DataEvent<String>>> onAddUser = createHandler(ADD_USER);
-    private ObjectProperty<EventHandler<DataEvent<User>>> onDropUser = createHandler(DROP_USER);
+    private ObjectProperty<EventHandler<DataEvent<String>>> onAddUser = new EventHandlerProperty<>(ADD_USER);
+    private ObjectProperty<EventHandler<DataEvent<User>>> onDropUser = new EventHandlerProperty<>(DROP_USER);
 
     // Nodes
-    @FXML
-    private BorderPane pane;
     @FXML
     private TextField profileTextField;
     @FXML
@@ -46,7 +42,7 @@ public class ProfilesManager extends BaseComponent {
     }
 
     public void initialize() {
-        BorderPane.setMargin(pane.getTop(), new Insets(5));
+        fitContentToComponentSize();
         usersListView.itemsProperty().bind(profiles);
         usersListView.setCellFactory((ListView<User> view) -> new ListCell<User>() {
 

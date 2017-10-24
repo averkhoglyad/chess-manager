@@ -37,11 +37,11 @@ public class TopMenu extends BaseComponent {
     private ListProperty<User> users = new SimpleListProperty<>(FXCollections.observableArrayList());
 
     // Event Handlers
-    private ObjectProperty<EventHandler<DataEvent<Integer>>> onChangePage = createHandler(CHANGE_PAGE);
-    private ObjectProperty<EventHandler<DataEvent<User>>> onSelectUser = createHandler(SELECT_USER);
-    private ObjectProperty<EventHandler<Event>> onImportPgn = createHandler(IMPORT_PGN);
-    private ObjectProperty<EventHandler<Event>> onClearSelectedGames = createHandler(CLEAR_SELECTED_GAMES);
-    private ObjectProperty<EventHandler<Event>> onManageUsersClick = createHandler(MANAGE_USERS_CLICK);
+    private ObjectProperty<EventHandler<DataEvent<Integer>>> onChangePage = new EventHandlerProperty<>(CHANGE_PAGE);
+    private ObjectProperty<EventHandler<DataEvent<User>>> onSelectUser = new EventHandlerProperty<>(SELECT_USER);
+    private ObjectProperty<EventHandler<Event>> onImportPgn = new EventHandlerProperty<>(IMPORT_PGN);
+    private ObjectProperty<EventHandler<Event>> onClearSelectedGames = new EventHandlerProperty<>(CLEAR_SELECTED_GAMES);
+    private ObjectProperty<EventHandler<Event>> onManageUsersClick = new EventHandlerProperty<>(MANAGE_USERS_CLICK);
 
     // Nodes
     @FXML
@@ -54,7 +54,7 @@ public class TopMenu extends BaseComponent {
     }
 
     public void initialize() {
-        fitContentToComponentSize();
+        fitContentToComponentWidth();
         noUsersMenuItem.visibleProperty().bind(Bindings.isEmpty(users));
         renderUserItems(users);
         users.addListener((ListChangeListener<? super User>) c -> renderUserItems(c.getList()));

@@ -22,6 +22,8 @@ public class GamePreview extends BaseComponent {
     @FXML
     private ChessDiagram diagram;
     @FXML
+    private Label title;
+    @FXML
     private Label moves;
     @FXML
     private ScrollPane contentBox;
@@ -34,6 +36,9 @@ public class GamePreview extends BaseComponent {
 
     public void initialize() {
         fitContentToComponentSize();
+
+        setFocusTraversable(false);
+        
         contentBox.visibleProperty().bind(game.isNotNull());
         loadingLabel.visibleProperty().bind(game.isNull().and(loading));
         diagram.flippedProperty().bind(flipped);
@@ -42,7 +47,7 @@ public class GamePreview extends BaseComponent {
             if (game == null) return;
             String fen = CollectionHelper.last(game.getFenDiagrams());
             diagram.setFen(fen);
-            diagram.setTitle(game.getPlayers().get(Color.white).getUserId() + " - " + game.getPlayers().get(Color.black).getUserId());
+            title.setText(game.getPlayers().get(Color.white).getUserId() + " - " + game.getPlayers().get(Color.black).getUserId());
             moves.setText(prepareMovesNotation(game));
         });
     }

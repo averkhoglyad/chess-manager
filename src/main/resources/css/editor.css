@@ -1,9 +1,0 @@
-
-.list-cell:selected {
-    -fx-background-color: inherit;
-    -fx-text-fill: inherit;
-}
-
-.list-cell:selected .label {
-    -fx-text-fill: inherit;
-}
