@@ -30,20 +30,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
-import static net.averkhoglyad.chess.manager.core.helper.ExceptionHelper.doQuiet;
 import static net.averkhoglyad.chess.manager.core.helper.ExceptionHelper.doStrict;
 
 @Slf4j
-public class JsonBasedWebClientImpl implements WebClient {
+public class JsonWebClientImpl implements WebClient {
 
     private final ObjectMapper mapper;
     private final String endpointUrl;
 
-    public JsonBasedWebClientImpl(String endpointUrl) {
+    public JsonWebClientImpl(String endpointUrl) {
         this(endpointUrl, new ObjectMapper());
     }
 
-    public JsonBasedWebClientImpl(String endpointUrl, ObjectMapper mapper) {
+    public JsonWebClientImpl(String endpointUrl, ObjectMapper mapper) {
         if (StringHelper.isBlank(endpointUrl)) {
             throw new IllegalArgumentException("Argument `endpointUrl` is required and can't be null or blank.");
         }
@@ -74,11 +73,7 @@ public class JsonBasedWebClientImpl implements WebClient {
     }
 
     private <R> R parseResponse(Request request, StatusLine statusLine, HttpEntity httpEntity)
-        throws ErrorResponseException, EmptyResponseException, IOException {
-        if (statusLine.getStatusCode() >= 400) {
-            throw new ErrorResponseException(statusLine.getStatusCode(), statusLine.getReasonPhrase(),
-                doQuiet(() -> mapper.readValue(httpEntity.getContent(), Map.class)));
-        }
+        throws EmptyResponseException, IOException {
         Operation operation = request.getOperation();
         if (operation.getResponseClass() == Void.class) return null;
         if (httpEntity.getContentLength() == 0) {
@@ -161,8 +156,7 @@ public class JsonBasedWebClientImpl implements WebClient {
     private ErrorResponseException createErrorResponse(CloseableHttpResponse httpResponse) {
         return new ErrorResponseException(
             httpResponse.getStatusLine().getStatusCode(),
-            httpResponse.getStatusLine().getReasonPhrase(),
-            doQuiet(() -> mapper.readValue(httpResponse.getEntity().getContent(), Map.class))
+            httpResponse.getStatusLine().getReasonPhrase()
         );
     }
 

@@ -8,15 +8,14 @@ import net.averkhoglyad.chess.manager.core.data.Paging;
 import net.averkhoglyad.chess.manager.core.sdk.data.Game;
 import net.averkhoglyad.chess.manager.core.sdk.data.PageResult;
 import net.averkhoglyad.chess.manager.core.sdk.data.User;
-import net.averkhoglyad.chess.manager.core.sdk.http.Request;
-import net.averkhoglyad.chess.manager.core.sdk.http.WebClient;
-import net.averkhoglyad.chess.manager.core.sdk.http.JsonBasedWebClientImpl;
+import net.averkhoglyad.chess.manager.core.sdk.http.*;
 import net.averkhoglyad.chess.manager.core.sdk.operation.GameOperation;
 import net.averkhoglyad.chess.manager.core.sdk.operation.UserOperation;
 
-import java.util.concurrent.CompletableFuture;
+import java.util.Optional;
 
 import static net.averkhoglyad.chess.manager.core.helper.ExceptionHelper.doStrict;
+import static net.averkhoglyad.chess.manager.core.helper.ExceptionHelper.runtimeException;
 
 public class LichessIntegrationServiceImpl implements LichessIntegrationService {
 
@@ -30,41 +29,48 @@ public class LichessIntegrationServiceImpl implements LichessIntegrationService 
         mapper.configure(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_AS_NULL, true);
         mapper.configure(DeserializationFeature.READ_DATE_TIMESTAMPS_AS_NANOSECONDS, false);
         mapper.registerModule(module);
-        client = new JsonBasedWebClientImpl("https://lichess.org", mapper);
+        client = new JsonWebClientImpl("https://lichess.org", mapper);
     }
 
     @Override
-    public CompletableFuture<User> getUser(String username) {
-        return CompletableFuture.supplyAsync(() -> {
-            Request request = Request.operation(UserOperation.GET)
-                .pathVariable("username", username)
-                .build();
-            return doStrict(() -> client.send(request));
-        });
+    public Optional<User> getUser(String username) {
+        Request request = Request.operation(UserOperation.GET)
+            .pathVariable("username", username)
+            .build();
+        return executeOptionalRequest(request);
     }
 
     @Override
-    public CompletableFuture<PageResult<Game>> getUserGames(String username, Paging paging) {
-        return CompletableFuture.supplyAsync(() -> {
-            Request request = Request.operation(UserOperation.GAMES)
-                .pathVariable("username", username)
-                .addQueryParam("nb", paging.getPageSize())
-                .addQueryParam("page", paging.getPage())
-                .build();
-            return doStrict(() -> client.send(request));
-        });
+    public Optional<PageResult<Game>> getUserGames(String username, Paging paging) {
+        Request request = Request.operation(UserOperation.GAMES)
+            .pathVariable("username", username)
+            .addQueryParam("nb", paging.getPageSize())
+            .addQueryParam("page", paging.getPage())
+            .build();
+        return executeOptionalRequest(request);
     }
 
     @Override
-    public CompletableFuture<Game> getGame(String gameId) {
-        return CompletableFuture.supplyAsync(() -> {
-            Request request = Request.operation(GameOperation.GET)
-                .pathVariable("id", gameId)
-                .addQueryParam("with_fens", "1")
-                .addQueryParam("with_moves", "1")
-                .build();
-            return doStrict(() -> client.send(request));
-        });
+    public Optional<Game> getGame(String gameId) {
+        Request request = Request.operation(GameOperation.GET)
+            .pathVariable("id", gameId)
+            .addQueryParam("with_fens", "1")
+            .addQueryParam("with_moves", "1")
+            .build();
+        return executeOptionalRequest(request);
+    }
+
+    private <E> Optional<E> executeOptionalRequest(Request request) {
+        try {
+            return Optional.of(client.send(request));
+        } catch (ErrorResponseException e) {
+            if(e.getStatusCode() == 404) {
+                return Optional.empty();
+            }
+            throw runtimeException(e);
+        } catch (EmptyResponseException e) {
+            return Optional.empty();
+        }
     }
 
     @Override

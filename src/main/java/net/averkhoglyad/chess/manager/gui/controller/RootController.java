@@ -13,10 +13,8 @@ import javafx.fxml.FXML;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 import net.averkhoglyad.chess.manager.core.data.Paging;
-import net.averkhoglyad.chess.manager.core.sdk.data.Color;
-import net.averkhoglyad.chess.manager.core.sdk.data.Game;
-import net.averkhoglyad.chess.manager.core.sdk.data.Player;
-import net.averkhoglyad.chess.manager.core.sdk.data.User;
+import net.averkhoglyad.chess.manager.core.sdk.data.*;
+import net.averkhoglyad.chess.manager.core.sdk.http.HttpStatusAwareException;
 import net.averkhoglyad.chess.manager.core.service.LichessIntegrationService;
 import net.averkhoglyad.chess.manager.core.service.ProfileService;
 import net.averkhoglyad.chess.manager.gui.component.GamePreview;
@@ -110,15 +108,34 @@ public class RootController {
                 .pageSize(PAGE_SIZE)
                 .build();
 
-            lichessService.getUserGames(currentUser, paging)
+            CompletableFuture.supplyAsync(() -> lichessService.getUserGames(currentUser, paging))
                 .thenAccept(res -> Platform.runLater(() ->
                 {
-                    clearDisplayedGame();
-                    totalPages.set(res.getNbPages());
-                    gamesTable.setGames(FXCollections.observableList(res.getCurrentPageResults()));
+                    if(res.isPresent()) {
+                        clearDisplayedGame();
+                        PageResult<Game> page = res.get();
+                        totalPages.set(page.getNbPages());
+                        gamesTable.setGames(FXCollections.observableList(page.getCurrentPageResults()));
+                    } else {
+                        AlertHelper.warning("Not Found", "Games for requested profile not found");
+                    }
                 }))
                 .exceptionally(e -> {
-                    Platform.runLater(() -> AlertHelper.error(e));
+                    Platform.runLater(() -> {
+                        if (e.getCause().getCause() instanceof HttpStatusAwareException) {
+                            HttpStatusAwareException cause = (HttpStatusAwareException) e.getCause().getCause();
+                            String title = cause.getStatusCode() + " " + cause.getReasonPhrase();
+                            if (cause.getStatusCode() == 404) {
+                                AlertHelper.warning(title, "Profile not found");
+                            } else if (cause.getStatusCode() > 500) {
+                                AlertHelper.warning(title, "Server is temporary unavailable");
+                            } else {
+                                AlertHelper.error(e.getCause());
+                            }
+                        } else {
+                            AlertHelper.error(e.getCause());
+                        }
+                    });
                     return null;
                 })
                 .whenComplete((res, ex) -> Platform.runLater(() -> gamesTable.setLoading(false)));
@@ -155,7 +172,9 @@ public class RootController {
                 List<Game> targetGames = new ArrayList<>(selectedGames);
                 double total = targetGames.size();
                 statusBar.progressProperty().bind(
-                    Bindings.when(progress.isEqualTo(0)).then(total / 1000).otherwise(progress.divide(total))
+                    Bindings.when(progress.isEqualTo(0))
+                        .then(total / 1000)
+                        .otherwise(progress.divide(total))
                 );
                 selectedGames.clear();
 
@@ -177,7 +196,7 @@ public class RootController {
                         Files.deleteIfExists(target);
                         Files.copy(tempPath, target);
                     } catch (IOException e) {
-                        Platform.runLater(() -> AlertHelper.error(e));
+                        Platform.runLater(() -> AlertHelper.error("Error", "Unexpected Input/Output Error", e));
                     } finally {
                         doQuiet(() -> Files.delete(tempPath));
                         Platform.runLater(() -> {
@@ -208,13 +227,17 @@ public class RootController {
         clearDisplayedGame();
         gamesTable.setDisplayedGame(event.getValue());
         gamePreview.setLoading(true);
-        lichessService.getGame(event.getValue().getId())
+        CompletableFuture.supplyAsync(() -> lichessService.getGame(event.getValue().getId()))
             .thenAccept(game ->
                 Platform.runLater(() -> {
-                    gamesTable.setDisplayedGame(game);
-                    gamePreview.setGame(game);
-                    Player blackPlayer = game.getPlayers().get(Color.black);
-                    gamePreview.setFlipped(currentUser.equals(blackPlayer.getUserId()));
+                    if (game.isPresent()) {
+                        gamesTable.setDisplayedGame(game.get());
+                        gamePreview.setGame(game.get());
+                        Player blackPlayer = game.get().getPlayers().get(Color.black);
+                        gamePreview.setFlipped(currentUser.equals(blackPlayer.getUserId()));
+                    } else {
+                        AlertHelper.warning("Not Found", "Game not found");
+                    }
                 }))
             .exceptionally(e -> {
                 Platform.runLater(() -> {

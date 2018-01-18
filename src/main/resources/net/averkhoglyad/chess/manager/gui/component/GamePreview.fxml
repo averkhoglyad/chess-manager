@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import net.averkhoglyad.chess.manager.gui.component.ChessDiagram?>
 <?import net.averkhoglyad.chess.manager.gui.component.GamePreview?>
+
 <fx:root type="net.averkhoglyad.chess.manager.gui.component.GamePreview" xmlns:fx="http://javafx.com/fxml">
     <StackPane alignment="CENTER">
         <Label fx:id="loadingLabel" text="Loading..."></Label>

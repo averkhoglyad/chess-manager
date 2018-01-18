@@ -7,6 +7,7 @@
 <?import net.averkhoglyad.chess.manager.gui.component.TopMenu?>
 <?import org.controlsfx.glyphfont.Glyph?>
 <?import java.lang.Integer?>
+
 <fx:root type="net.averkhoglyad.chess.manager.gui.component.TopMenu" xmlns:fx="http://javafx.com/fxml">
     <fx:define>
         <Integer fx:id="ZERO" fx:value="0"/>
@@ -80,4 +81,3 @@
         </children>
     </VBox>
 </fx:root>
-

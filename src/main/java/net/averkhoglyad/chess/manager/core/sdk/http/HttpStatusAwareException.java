@@ -1,5 +1,8 @@
 package net.averkhoglyad.chess.manager.core.sdk.http;
 
+import lombok.Getter;
+
+@Getter
 public abstract class HttpStatusAwareException extends Exception
 {
 
@@ -16,16 +19,6 @@ public abstract class HttpStatusAwareException extends Exception
 	public String getMessage()
 	{
 		return "Status: " + statusCode + " " + reasonPhrase;
-	}
-
-	public int getStatusCode()
-	{
-		return statusCode;
-	}
-
-	public String getReasonPhrase()
-	{
-		return reasonPhrase;
 	}
 
 }

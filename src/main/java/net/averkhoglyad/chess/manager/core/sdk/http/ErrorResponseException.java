@@ -9,6 +9,11 @@ public class ErrorResponseException extends HttpStatusAwareException
 
 	private final Map<String, Object> meta;
 
+	public ErrorResponseException( int statusCode, String reasonPhrase )
+	{
+		this( statusCode, reasonPhrase, Collections.emptyMap() );
+	}
+
 	public ErrorResponseException( int statusCode, String reasonPhrase, Map<String, Object> meta )
 	{
 		super( statusCode, reasonPhrase );

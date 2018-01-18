@@ -8,6 +8,7 @@
 <?import net.averkhoglyad.chess.manager.gui.component.TopMenu?>
 <?import org.controlsfx.control.MasterDetailPane?>
 <?import org.controlsfx.control.StatusBar?>
+
 <BorderPane xmlns:fx="http://javafx.com/fxml" stylesheets="@/css/app.css"
             fx:controller="net.averkhoglyad.chess.manager.gui.controller.RootController"
             prefHeight="480" prefWidth="640">
@@ -29,7 +30,7 @@
         </TopMenu>
     </top>
     <center>
-        <MasterDetailPane dividerPosition="0.65" animated="true" >
+        <MasterDetailPane dividerPosition="0.6" animated="true" >
             <detailSide>RIGHT</detailSide>
             <masterNode>
                 <GamesTable fx:id="gamesTable" onDisplayGame="#displayGame"

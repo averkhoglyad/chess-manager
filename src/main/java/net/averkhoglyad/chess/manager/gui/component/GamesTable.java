@@ -143,12 +143,14 @@ public class GamesTable extends BaseComponent {
 
         whitePlayerColumn.setCellValueFactory(createPlayerCellValueProvider(Color.white));
         blackPlayerColumn.setCellValueFactory(createPlayerCellValueProvider(Color.black));
+
         turnsColumn.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(Integer.toString(((Double) Math.ceil(cellData.getValue().getTurns() / 2)).intValue())));
         statusColumn.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getStatus().toString()));
         finishedAtColumn.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(
             DateTimeFormatter.ofPattern("HH:mm dd-MM-yyyy")
                 .format(cellData.getValue().getLastMoveAt().atZone(ZoneId.systemDefault()))
         ));
+
         detailsColumn.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getGame()));
 
         detailsColumn.setCellFactory((TableColumn<GameVO, Game> column) -> {
@@ -175,10 +177,18 @@ public class GamesTable extends BaseComponent {
     }
 
     private Callback<CellDataFeatures<GameVO, String>, ObservableValue<String>> createPlayerCellValueProvider(Color color) {
-        return cellData -> Optional.ofNullable(cellData.getValue().getPlayers().get(color))
-            .map(it -> it.getUserId() + " (" + it.getRating() + ")")
-            .map(ReadOnlyStringWrapper::new)
-            .orElse(null);
+        return cellData -> {
+            GameVO game = cellData.getValue();
+            if (game == null) {
+                return null;
+            }
+            // TODO: Mark winner!
+            return Optional.ofNullable(game.getPlayers())
+                .map(it -> it.get(color))
+                .map(it -> it.getUserId() + " (" + it.getRating() + ")" + (color == game.getWinner() ? " *" : ""))
+                .map(ReadOnlyStringWrapper::new)
+                .orElse(null);
+        };
     }
 
     // Properties

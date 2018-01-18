@@ -5,15 +5,15 @@ import net.averkhoglyad.chess.manager.core.sdk.data.Game;
 import net.averkhoglyad.chess.manager.core.sdk.data.PageResult;
 import net.averkhoglyad.chess.manager.core.sdk.data.User;
 
-import java.util.concurrent.CompletableFuture;
+import java.util.Optional;
 
 public interface LichessIntegrationService {
 
-    CompletableFuture<User> getUser(String username);
+    Optional<User> getUser(String username);
 
-    CompletableFuture<PageResult<Game>> getUserGames(String username, Paging paging);
+    Optional<PageResult<Game>> getUserGames(String username, Paging paging);
 
-    CompletableFuture<Game> getGame(String gameId);
+    Optional<Game> getGame(String gameId);
 
     String loadGamePgn(String gameId);
 

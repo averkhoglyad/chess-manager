@@ -3,6 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.Group?>
 <?import net.averkhoglyad.chess.manager.gui.component.GamesTable?>
+
 <fx:root type="net.averkhoglyad.chess.manager.gui.component.GamesTable" xmlns:fx="http://javafx.com/fxml">
     <TableView fx:id="gamesTable">
         <placeholder>
@@ -27,10 +28,12 @@
                          minWidth="28" maxWidth="28" prefWidth="28"/>
             <TableColumn fx:id="whitePlayerColumn" text="White"/>
             <TableColumn fx:id="blackPlayerColumn" text="Black"/>
-            <TableColumn fx:id="turnsColumn" text="Turns"/>
-            <TableColumn fx:id="statusColumn" text="Status"/>
-            <TableColumn fx:id="finishedAtColumn" text="Finished"/>
+            <TableColumn fx:id="turnsColumn" text="Turns"
+                         minWidth="50" maxWidth="1000" prefWidth="50"/>
+            <TableColumn fx:id="statusColumn" text="Status"
+                         minWidth="50" maxWidth="1000" prefWidth="50"/>
+            <TableColumn fx:id="finishedAtColumn" text="Finished"
+                         minWidth="75" maxWidth="1000" prefWidth="75"/>
         </columns>
     </TableView>
 </fx:root>
-
