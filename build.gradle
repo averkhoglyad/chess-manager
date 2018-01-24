@@ -1,12 +1,11 @@
 group 'averkhoglyad'
-version '0.1-ALFA'
+version '0.1.1-ALFA'
 
 apply plugin: 'java'
 apply plugin: 'application'
+apply plugin: 'excelsiorJet'
 
 mainClassName="net.averkhoglyad.chess.manager.Main"
-
-apply plugin: 'excelsiorJet'
 
 buildscript {
     ext.jetPluginVersion = '1.1.1'
@@ -19,7 +18,7 @@ buildscript {
 }
 
 excelsiorJet {
-    mainClass = 'net.averkhoglyad.chess.manager.Main'
+    mainClass = mainClassName
     hideConsole = true
     globalOptimizer = true
     splash = new File("src/main/jetresources/splash.jpg")
