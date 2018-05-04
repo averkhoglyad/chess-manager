@@ -6,16 +6,17 @@ import javafx.beans.property.SimpleListProperty
 import javafx.beans.property.SimpleSetProperty
 import javafx.collections.FXCollections
 import javafx.collections.ListChangeListener
-import javafx.geometry.Pos
 import javafx.scene.control.MenuItem
 import javafx.scene.control.Tooltip
 import net.averkhoglyad.chess.manager.core.data.Profile
 import net.averkhoglyad.chess.manager.core.sdk.lichess.data.Game
-import net.averkhoglyad.chess.manager.gui.util.fontawesome
 import net.averkhoglyad.chess.manager.core.util.noop0
 import net.averkhoglyad.chess.manager.core.util.noop1
+import net.averkhoglyad.chess.manager.gui.fragment.Paginator
+import net.averkhoglyad.chess.manager.gui.util.fontawesome
 import net.averkhoglyad.chess.manager.gui.util.splitmenubutton
-import org.controlsfx.glyphfont.FontAwesome.Glyph.*
+import org.controlsfx.glyphfont.FontAwesome.Glyph.DOWNLOAD
+import org.controlsfx.glyphfont.FontAwesome.Glyph.USERS
 import tornadofx.*
 
 class TopMenu : View() {
@@ -48,6 +49,8 @@ class TopMenu : View() {
             onProfileManager()
         }
     }
+
+    private val paginator = find<Paginator>()
 
     override val root = vbox {
         menubar {
@@ -88,35 +91,12 @@ class TopMenu : View() {
                 }
             }
             spacer()
-            button {
-                prefWidth = 25.0
-                alignment = Pos.CENTER
-                graphic = fontawesome(LONG_ARROW_LEFT) {
-                    alignment = Pos.TOP_CENTER
-                    fontSize = 10.0
-                }
-                visibleWhen { totalPagesProperty.greaterThan(1) }
-                disableWhen { currentPageProperty.eq(1) }
-                action {
-                    onPageChange(currentPage - 1)
-                }
-            }
-            label {
-                // TODO: Add control to navigate to any page
-                textProperty().bind(concat(currentPageProperty, " / ", totalPagesProperty))
-                visibleWhen { totalPagesProperty.greaterThan(0) }
-            }
-            button {
-                graphic = fontawesome(LONG_ARROW_RIGHT) {
-                    alignment = Pos.TOP_CENTER
-                    fontSize = 10.0
-                }
-                prefWidth = 25.0
-                alignment = Pos.CENTER
-                visibleWhen { totalPagesProperty.greaterThan(1) }
-                disableWhen { currentPageProperty.eq(totalPagesProperty) }
-                action {
-                    onPageChange(currentPage + 1)
+
+            this += paginator.apply {
+                totalProperty.bind(totalPagesProperty)
+                pageProperty.bind(currentPageProperty)
+                onChange {
+                    onPageChange(it)
                 }
             }
         }

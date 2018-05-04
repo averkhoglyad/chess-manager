@@ -9,7 +9,7 @@ version = "0.1.2-ALFA"
 
 buildscript {
     var kotlin_version: String by extra
-    kotlin_version = "1.2.30"
+    kotlin_version = "1.2.41"
 
     repositories {
         mavenCentral()
@@ -42,14 +42,14 @@ dependencies {
     compile("no.tornado:tornadofx:1.7.15")
     compile("org.controlsfx:controlsfx:8.40.14")
     compile("org.apache.httpcomponents:httpclient:4.5.5")
-    compile("com.fasterxml.jackson.core:jackson-core:2.9.4")
-    compile("com.fasterxml.jackson.core:jackson-databind:2.9.4")
-    compile("com.fasterxml.jackson.core:jackson-annotations:2.9.4")
-    compile("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.4")
-    compile("com.fasterxml.jackson.module:jackson-module-kotlin:2.9.4.1")
+    compile("com.fasterxml.jackson.core:jackson-core:2.9.5")
+    compile("com.fasterxml.jackson.core:jackson-databind:2.9.5")
+    compile("com.fasterxml.jackson.core:jackson-annotations:2.9.5")
+    compile("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.5")
+    compile("com.fasterxml.jackson.module:jackson-module-kotlin:2.9.5")
     compile("ch.qos.logback:logback-classic:1.2.3")
     compile("org.slf4j:jul-to-slf4j:1.7.25")
-//    testCompile("org.junit.jupiter:junit-jupiter-api:5.1.0")
+    testCompile("org.junit.jupiter:junit-jupiter-api:5.1.0")
 }
 
 tasks.withType<KotlinCompile> {

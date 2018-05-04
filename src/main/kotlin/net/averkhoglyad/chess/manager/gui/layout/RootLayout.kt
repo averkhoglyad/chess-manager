@@ -44,6 +44,8 @@ class RootLayout : View("Chess Manager") {
 
     private val selectedGames = SimpleSetProperty<Game>(FXCollections.observableSet())
 
+    private var initDirToImportFile = File("/")
+
     ///
     override val root = borderpane {
         top = topMenu.root
@@ -85,7 +87,12 @@ class RootLayout : View("Chess Manager") {
             selectedGames.clear()
         }
         topMenu.onImportGames {
-            val file: File = chooseFile(owner = primaryStage,mode = FileChooserMode.Save, filters = pgnFilters).firstOrNull() ?: return@onImportGames
+            val file: File = chooseFile(owner = primaryStage, mode = FileChooserMode.Save, filters = pgnFilters) {
+                this.initialDirectory = initDirToImportFile
+            }.firstOrNull() ?: return@onImportGames
+
+            initDirToImportFile = file.parentFile
+
             val path = if (file.name.endsWith(".pgn")) {
                 file.toPath()
             } else {
@@ -100,7 +107,7 @@ class RootLayout : View("Chess Manager") {
                 statusBar.progressProperty().unbind()
                 statusBar.progress = 0.0
                 when (res) {
-                    is Error -> tornadofx.error(title = "Error on games import", header = "", content = "Unexpected I/O error.\n${res.ex.message}")
+                    is Error -> error(title = "Error on games import", header = "", content = "Unexpected I/O error.\n${res.ex.message}")
                     else -> Notifications.create()
                             .title("Success")
                             .text("Import completed successfully")
