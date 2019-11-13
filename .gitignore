@@ -1,6 +1,9 @@
 .idea/
-etc/
+*.iml
+
 build/
 .gradle/
 out/
-/src/test/java/TestTest.java
+target/
+
+etc/
