@@ -507,7 +507,7 @@
     </dependencyManagement>
 
     <build>
-        <finalName>payment-solution</finalName>
+        <finalName>chess-manager</finalName>
         <sourceDirectory>src/main/kotlin</sourceDirectory>
         <testSourceDirectory>src/test/kotlin</testSourceDirectory>
         <plugins>

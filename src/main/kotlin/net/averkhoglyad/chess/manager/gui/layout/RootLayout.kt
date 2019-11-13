@@ -25,7 +25,6 @@ import java.io.File
 
 private val pgnFilters = arrayOf(FileChooser.ExtensionFilter("PGN file", "*.pgn"))
 
-
 class RootLayout : View("Chess Manager") {
 
     private val controller by inject<RootController>()
@@ -67,7 +66,7 @@ class RootLayout : View("Chess Manager") {
             height = 600.0
         }
 
-        topMenu.profiles.value = profilesRepo.list().sortedBy { it.lichessId }.toMutableList().observable()
+        topMenu.profiles.value = profilesRepo.list().sortedBy { it.lichessId }.asObservable()
         topMenu.onManageProfiles {
             val sortedProfiles = profilesRepo.list().sortedBy { it.lichessId }
             val profileManager = find<ProfilesManager>(mapOf(ProfilesManager::profiles to sortedProfiles))
@@ -167,8 +166,8 @@ class RootLayout : View("Chess Manager") {
                     Empty -> warning(title = "Not found", header = "", content = "Games for requested profile not found")
                     is Error -> throw res.ex
                     is Success -> {
-                        var page = (res.data as? Page<Game>) ?: return@loadGames
-                        gamesTable.games = page.items.observable()
+                        val page = (res.data as? Page<Game>) ?: return@loadGames
+                        gamesTable.games = page.items.asObservable()
                         topMenu.totalPages = page.total
                     }
                 }

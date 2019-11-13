@@ -91,20 +91,19 @@ class ChessDiagram : Fragment() {
         if (i > 0) {
             fen = fen.substring(0, i)
         }
-        val result = mutableListOf<Pair<String, Int>>()
-        val rows = fen.split('/').dropLastWhile { it.isEmpty() }.toTypedArray()
+        val rows = fen.split('/').dropLastWhile { it.isEmpty() }
         var position = 0
-        for (row in rows) {
-            for (ch in row.toCharArray()) {
-                val s = String(charArrayOf(ch))
-                if (Character.isAlphabetic(ch.toInt())) {
-                    result.add(Pair(s, position++))
-                } else {
-                    position += Integer.valueOf(s)
+        return rows.asSequence()
+                .flatMap { row -> row.toCharArray().asSequence() }
+                .fold(mutableListOf()) { result, ch ->
+                    val s = ch.toString() // String(charArrayOf(ch))
+                    if (ch.isLetter()) {
+                        result.add(Pair(s, position++))
+                    } else {
+                        position += s.toInt() // Integer.valueOf(s)
+                    }
+                    return@fold result
                 }
-            }
-        }
-        return result
     }
 
 }
